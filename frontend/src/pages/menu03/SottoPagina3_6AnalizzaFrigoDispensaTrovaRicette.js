@@ -78,7 +78,7 @@ const SottoPagina3_6AnalizzaFrigoDispensaTrovaRicette = () => {
         });
 
         try {
-            const response = await fetch('/api/food/ricette-da-foto', { 
+            const response = await fetch(`${API_URL}/api/food/ricette-da-foto`, { 
                 method: 'POST',
                 body: formData,
             });
@@ -120,7 +120,7 @@ const SottoPagina3_6AnalizzaFrigoDispensaTrovaRicette = () => {
         };
 
         try {
-            const response = await fetch('/api/food/ricette-da-foto', { 
+            const response = await fetch(`${API_URL}/api/food/ricette-da-foto`, { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
@@ -148,7 +148,7 @@ const SottoPagina3_6AnalizzaFrigoDispensaTrovaRicette = () => {
         setSelectedRecipeIndex(index);
         
         try {
-            const response = await fetch('/api/food/ricette-da-foto/generate-media', {
+            const response = await fetch(`${API_URL}/api/food/ricette-da-foto/generate-media`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -185,7 +185,7 @@ const SottoPagina3_6AnalizzaFrigoDispensaTrovaRicette = () => {
         const imagePayload = generatedImages.map(img => img.dataUrl);
 
         try {
-            const response = await fetch('/api/food/ricette-da-foto/generate-media', {
+            const response = await fetch(`${API_URL}/api/food/ricette-da-foto/generate-media`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -218,7 +218,7 @@ const SottoPagina3_6AnalizzaFrigoDispensaTrovaRicette = () => {
         setIsAudioOnly(false); 
         
         try {
-            const response = await fetch('/api/food/ricette-da-foto/generate-media', {
+            const response = await fetch(`${API_URL}/api/food/ricette-da-foto/generate-media`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

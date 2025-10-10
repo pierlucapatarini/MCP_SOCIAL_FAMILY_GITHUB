@@ -67,7 +67,7 @@ export default function ExportTestAudioVideo() {
         };
 
         try {
-            const response = await fetch('/api/test/test-media', {
+            const response = await fetch(`${API_URL}/api/test/test-media`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),

@@ -197,7 +197,7 @@ function FunAnalisiAndamentoPeso() {
                                userProfile.gender.toLowerCase() === 'donna' ? 'femmina' : 
                                userProfile.gender.toLowerCase();
 
-            const response = await fetch('api/nutrition/summary', {
+            const response = await fetch(`${API_URL}/api/nutrition/summary`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

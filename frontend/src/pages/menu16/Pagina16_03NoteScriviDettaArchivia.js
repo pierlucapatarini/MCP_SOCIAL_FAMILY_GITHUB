@@ -728,7 +728,7 @@ const generateProjectPDF = async (projectName) => {
   
   try {
     // Chiamata al backend
-    const response = await fetch('api/notes/generate-pdf-summary', {
+    const response = await fetch(`${API_URL}api/notes/generate-pdf-summary`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

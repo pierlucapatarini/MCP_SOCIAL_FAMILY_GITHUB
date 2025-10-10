@@ -72,7 +72,7 @@ const AIWriteMailComponent = ({ sendData, setSendData, handleSendEmail, loading,
         setStatus("Richiesta di riscrittura formale ad Alfred in corso...");
         
         try {
-            const response = await fetch(`${BACKEND_URL}/ai-draft-rewrite`, {
+            const response = await fetch(`${API_URL}/ai-draft-rewrite`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -176,7 +176,7 @@ const ReadMailComponent = ({
         ).join(" ");
         
         try {
-            const response = await fetch(`${BACKEND_URL}/tts`, {
+            const response = await fetch(`${API_URL}/tts`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text: `Hai ${unreadEmails.length} email non lette. Le prime ${Math.min(5, unreadEmails.length)} sono: ${summaryText}` })
@@ -498,7 +498,7 @@ const ReadMailComponent = ({
                 return;
             }
 
-            const response = await fetch(`${BACKEND_URL}/send`, {
+            const response = `${BACKEND_URL}/send`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ to: toFinal, subject: subjectFinal, body: bodyFinal })
@@ -540,7 +540,7 @@ const ReadMailComponent = ({
         setAiActionFlags({ moveImap: false, createEvent: false, createTodo: false, archiveDoc: false });
         
         try {
-            const response = await fetch(`${BACKEND_URL}?timeFilter=${timeFilter}`, { method: 'GET' });
+            const response = await fetch(`${API_URL}?timeFilter=${timeFilter}`, { method: 'GET' });
             const data = await response.json();
             
             if (response.ok && data.success) {
@@ -568,7 +568,7 @@ const ReadMailComponent = ({
         setStatus(`Richiesta ${action} AI in corso...`);
         
         try {
-            const response = await fetch(`${BACKEND_URL}/ai-response`, {
+            const response = await fetch(`${API_URL}/ai-response`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ emailContent: email, userAction: action })
@@ -630,7 +630,7 @@ const ReadMailComponent = ({
             const folderName = aiClassification.categoria_archiviazione; 
             setStatus(`📦 1. Spostamento IMAP in "${folderName}" in corso...`);
             try {
-                const response = await fetch(`${BACKEND_URL}/move`, {
+                const response = await fetch(`${API_URL}/move`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ uid: Number(uid), folderName: folderName.trim() }),
@@ -682,7 +682,7 @@ if (aiActionFlags.createEvent && aiClassification.scadenza_calendario_data !== "
     setStatus(`📅 2. Creazione Evento Calendario per "${aiClassification.scadenza_calendario_descrizione}" in corso...`);
 
     try {
-        const response = await fetch(`${BACKEND_URL}/create-calendar-event`, {
+        const response = await fetch(`${API_URL}/create-calendar-event`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestBody), // Inviamo il requestBody completo e corretto
@@ -714,7 +714,7 @@ if (aiActionFlags.createEvent && aiClassification.scadenza_calendario_data !== "
             setStatus(`📝 3. Inserimento Compito ToDo: "${todoTask}" in corso...`);
             
             try {
-                const response = await fetch(`${BACKEND_URL}/create-todo`, { // NUOVA ROTTA PER TODO
+                const response = await fetch(`${API_URL}/create-todo`, { // NUOVA ROTTA PER TODO
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

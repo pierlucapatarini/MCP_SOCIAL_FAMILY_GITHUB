@@ -82,7 +82,7 @@ function ExportPagina20_23AIButler() {
     setError('');
     
     try {
-      const response = await fetch('api/alfred-summary', {
+      const response = await fetch(`${API_URL}api/alfred-summary`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
