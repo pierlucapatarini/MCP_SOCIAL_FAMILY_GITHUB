@@ -33,10 +33,18 @@ const YAHOO_CONFIG = {
     },
     smtp: nodemailer.createTransport({
         host: "smtp.mail.yahoo.com",
-        port: 465, 
-        secure: true, 
+        port: 587,             // <-- CAMBIA LA PORTA
+        secure: false,         // <-- IMPOSTA A FALSE per 587
+        requireTLS: true,      // <-- AGGIUNGI QUESTO CAMPO per STARTTLS
+
         auth: { user: process.env.YAHOO_EMAIL, pass: process.env.YAHOO_PASSWORD },
-        tls: { rejectUnauthorized: false } 
+        timeout: 60000,          // Timeout generale (es. 60s)
+        connectionTimeout: 60000, // Timeout per stabilire la connessione
+        socketTimeout: 60000,     // Timeout per l'attività del socket
+        tls: { rejectUnauthorized: false } 
+
+
+
     })
 };
 
