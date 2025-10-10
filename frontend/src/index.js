@@ -3,9 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// CORREZIONE 1: Aggiunta l'estensione .js
 import App from './App.js'; 
-// CORREZIONE 2: Aggiunta l'estensione .js
 import reportWebVitals from './reportWebVitals.js'; 
 
 
