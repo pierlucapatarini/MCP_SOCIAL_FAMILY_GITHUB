@@ -3,10 +3,13 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Mail, MessageCircle, Zap, X, Calendar, CheckCircle, FileText, Loader, Send, Volume2, Mic, ChevronLeft } from 'lucide-react'; 
 import '../../styles/StilePagina16_02.css'; 
+
+// *** AGGIUNGI QUESTA LINEA (assumendo il percorso corretto) ***
 import { supabase } from '../../supabaseClient'; 
 
-const API_URL = process.env.REACT_APP_API_URL; 
 
+
+const BACKEND_URL = 'api/email';
 
 // Helper per classi CSS
 const getCategoryClass = (category) => {
@@ -160,6 +163,7 @@ const ReadMailComponent = ({
 }) => {
     const [isEmailDetailOpen, setIsEmailDetailOpen] = useState(false);
 
+    // Gestione della riproduzione vocale (omesso per brevità nel commento)
     const handleReadListVocally = async () => {
         if (!unreadEmails || unreadEmails.length === 0) {
             setStatus("Nessuna email da leggere.");
@@ -196,7 +200,7 @@ const ReadMailComponent = ({
         setSelectedEmail(email);
         setAiClassification(null);
         setAiDraft(null);
-        setAiActionFlags({ moveImap: false, createEvent: false, createTodo: false, archiveDoc: false });
+        setAiActionFlags({ moveImap: false, createEvent: false, createTodo: false, archiveDoc: false }); // Reset flags
         setIsEmailDetailOpen(true);
     };
 
@@ -204,29 +208,29 @@ const ReadMailComponent = ({
         setSelectedEmail(null);
         setAiDraft(null);
         setAiClassification(null);
-        setAiActionFlags({ moveImap: false, createEvent: false, createTodo: false, archiveDoc: false });
+        setAiActionFlags({ moveImap: false, createEvent: false, createTodo: false, archiveDoc: false }); // Reset flags
         setIsEmailDetailOpen(false);
     };
 
     return (
         <div className="read-email-section module-card">
             {!isEmailDetailOpen && (
-                <>
-                    <h3 className="section-title"><Mail size={20} /> Leggi Nuove Mail</h3>
-                    <div className="filter-controls">
-                        <select value={timeFilter} onChange={(e) => setTimeFilter(e.target.value)} disabled={loading}> 
-                            <option value="day">Giorno precedente ed attuale</option>
-                            <option value="week">Ultima Settimana</option>
-                            <option value="month">Ultimo Mese</option>
-                        </select>
-                        <button onClick={handleReadEmail} disabled={loading} className="action-button primary">
-                            {(loading && !isAiLoading) ? <Loader size={18} className="spinner" /> : <Mail size={18} />} Scarica Nuove Mail
-                        </button>
-                        <button onClick={handleReadListVocally} disabled={loading || !unreadEmails || unreadEmails.length === 0} className="action-button secondary">
-                            <Volume2 size={18} /> Elenca Vocalmente ({unreadEmails ? unreadEmails.length : 0})
-                        </button>
-                    </div>
-                </>
+                    <>
+                        <h3 className="section-title"><Mail size={20} /> Leggi Nuove Mail</h3>
+                        <div className="filter-controls">
+                            <select value={timeFilter} onChange={(e) => setTimeFilter(e.target.value)} disabled={loading}> 
+                                <option value="day">Giorno precedente ed attuale</option>
+                                <option value="week">Ultima Settimana</option>
+                                <option value="month">Ultimo Mese</option>
+                            </select>
+                            <button onClick={handleReadEmail} disabled={loading} className="action-button primary">
+                                {(loading && !isAiLoading) ? <Loader size={18} className="spinner" /> : <Mail size={18} />} Scarica Nuove Mail
+                            </button>
+                            <button onClick={handleReadListVocally} disabled={loading || !unreadEmails || unreadEmails.length === 0} className="action-button secondary">
+                                <Volume2 size={18} /> Elenca Vocalmente ({unreadEmails ? unreadEmails.length : 0})
+                            </button>
+                        </div>
+                    </>
             )}
             
             <div className="email-content-area">
@@ -264,6 +268,9 @@ const ReadMailComponent = ({
                             <div className="ai-classification-box">
                                 <h4>Analisi Alfred: Riassunto e Proposte</h4>
                                 
+                                {/* ------------------------------------------------------------- */}
+                                {/* MODIFICA RICHIESTA: Riassunto/Motivazione in cima */}
+                                {/* ------------------------------------------------------------- */}
                                 <div className="ai-summary-box ai-draft-notice">
                                     <h5 style={{margin: '0 0 5px 0'}}>Riassunto / Rilevanza (Motivazione Alfred):</h5>
                                     <p style={{fontStyle: 'italic', margin: 0}}>{aiClassification.motivo_archiviazione}</p>
@@ -272,6 +279,7 @@ const ReadMailComponent = ({
                                 <p className="ai-draft-notice" style={{marginTop: '15px'}}>**Seleziona le azioni che desideri vengano eseguite da Alfred:**</p>
                                 <hr className="divider" />
 
+                                {/* 1. Archiviazione IMAP (Spostamento email) - MODIFICATO */}
                                 <label className={`ai-action-checkbox ${aiActionFlags.moveImap ? 'checked-action' : ''}`}>
                                     <input 
                                         type="checkbox" 
@@ -285,6 +293,7 @@ const ReadMailComponent = ({
                                 </label>
                                 <hr className="divider" />
                                 
+                                {/* 2. Creazione Evento Calendario */}
                                 {(aiClassification.scadenza_calendario_data !== "NULL" && aiClassification.scadenza_calendario_data) ? (
                                     <>
                                         <label className={`ai-action-checkbox ${aiActionFlags.createEvent ? 'checked-action' : ''}`}>
@@ -304,6 +313,7 @@ const ReadMailComponent = ({
                                     <p className="ai-highlight info">2) Nessuna scadenza/evento rilevante trovato dall'AI.</p>
                                 )}
                                 
+                                {/* 3. Inserimento To-Do List */}
                                 {(aiClassification.azione_todo !== "NULL" && aiClassification.azione_todo) ? (
                                     <>
                                         <label className={`ai-action-checkbox ${aiActionFlags.createTodo ? 'checked-action' : ''}`}>
@@ -323,6 +333,7 @@ const ReadMailComponent = ({
                                     <p className="ai-highlight info">3) Nessun compito immediato richiesto dall'AI.</p>
                                 )}
 
+                                {/* 4. Archiviazione Documento Allegato */}
                                 {aiClassification.documento_rilevante ? (
                                     <>
                                         <label className={`ai-action-checkbox ${aiActionFlags.archiveDoc ? 'checked-action' : ''}`}>
@@ -419,7 +430,16 @@ const ReadMailComponent = ({
 /* ===============================================
  * COMPONENTE PRINCIPALE
  * =============================================== */
-const Pagina16_02LeggiScriviArchivia_Mail = () => {
+
+
+
+    
+    
+
+
+
+
+    const Pagina16_02LeggiScriviArchivia_Mail = () => {
     const [userId, setUserId] = useState(null); 
     const [currentMode, setCurrentMode] = useState('menu'); 
     const [status, setStatus] = useState('Pronto');
@@ -438,6 +458,10 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
         archiveDoc: false 
     }); 
 
+
+// ... (dopo la definizione degli stati)
+
+    // *** AGGIUNGI QUESTO HOOK ***
     useEffect(() => {
         const fetchUserId = async () => {
             try {
@@ -446,6 +470,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
                     setUserId(user.id);
                     console.log(`ID Utente Dinamico recuperato: ${user.id}`);
                 } else {
+                    // Gestione: Utente non loggato (potresti reindirizzare)
                     console.error("Nessun utente loggato trovato.");
                 }
             } catch (error) {
@@ -454,9 +479,12 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
         };
 
         fetchUserId();
-    }, []);
+    }, []); // Esegue solo al mount
 
-    // FUNZIONE INVIO EMAIL - CORRETTA
+
+
+
+    // Funzione per l'invio email
     const handleSendEmail = useCallback(async (overrideData = {}) => {
         setLoading(true);
         setStatus('Invio email in corso...');
@@ -470,8 +498,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
                 return;
             }
 
-            // FIX: Aggiunto await fetch correttamente
-            const response = await fetch(`${API_URL}/send`, {
+            const response = `${BACKEND_URL}/send`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ to: toFinal, subject: subjectFinal, body: bodyFinal })
@@ -502,6 +529,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
         }
     }, [sendData]);
 
+    // Funzione per la lettura email
     const handleReadEmail = useCallback(async () => {
         setLoading(true);
         setStatus('Recupero email Yahoo in corso...');
@@ -531,6 +559,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
         }
     }, [timeFilter]);
 
+    // Funzione per la chiamata AI (Classifica/Risposta)
     const handleAICall = useCallback(async (action, email) => {
         setIsAiLoading(true);
         setAiDraft(null);
@@ -574,21 +603,29 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
         }
     }, []);
 
-    // FUNZIONE CONFIRM MOVE
-    const confirmMove = async () => {
-        if (!selectedEmail || !aiClassification || !userId) { 
-            setStatus("❌ Errore: Dati di archiviazione o ID utente mancanti.");
-            return;
-        }
+    // =================================================================
+    // FUNZIONE CONFIRM MOVE (Logica Azione 1  2 3  4 )
+    // =================================================================
+    const confirmMove = async () => {
+        
+    
 
-        const uid = selectedEmail.UID;
-        setLoading(true);
-        setStatus(`📦 Esecuzione azioni Alfred Butler in corso...`);
+         if (!selectedEmail || !aiClassification || !userId) { 
+            setStatus("❌ Errore: Dati di archiviazione o ID utente mancanti.");
+            return;
+        }
 
-        const alfredActions = [];
-        let success = true;
 
-        // 1. ARCHIVIAZIONE IMAP
+
+
+        const uid = selectedEmail.UID;
+        setLoading(true);
+        setStatus(`📦 Esecuzione azioni Alfred Butler in corso...`);
+
+        const alfredActions = [];
+        let success = true;
+
+        // 1. ARCHIVIAZIONE IMAP (Spostamento email)
         if (aiActionFlags.moveImap && aiClassification.categoria_archiviazione) {
             const folderName = aiClassification.categoria_archiviazione; 
             setStatus(`📦 1. Spostamento IMAP in "${folderName}" in corso...`);
@@ -619,60 +656,71 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
         } else {
             alfredActions.push(`1. Archiviazione IMAP in "${aiClassification.categoria_archiviazione || 'N/D'}" saltata.`);
         }
+        
 
-        // 2. CREAZIONE EVENTO CALENDARIO
-        if (aiActionFlags.createEvent && aiClassification.scadenza_calendario_data !== "NULL" && aiClassification.scadenza_calendario_data) {
-            const eventData = {
-                scadenza_calendario_data: aiClassification.scadenza_calendario_data,
-                scadenza_calendario_descrizione: aiClassification.scadenza_calendario_descrizione,
-            };
 
-            const requestBody = {
-                emailUID: selectedEmail.UID,
-                emailSubject: selectedEmail.SUBJECT, 
-                emailContent: selectedEmail.BODY_TEXT || selectedEmail.BODY_HTML || selectedEmail.PREVIEW, 
-                userId: userId, 
-                calendarData: eventData
-            };
+// 2. CREAZIONE EVENTO CALENDARIO (SEZIONE CORRETTA)
+if (aiActionFlags.createEvent && aiClassification.scadenza_calendario_data !== "NULL" && aiClassification.scadenza_calendario_data) {
+    
+    // 1. Dati per l'evento, mantenuti nidificati per chiarezza di backend
+    const eventData = {
+        scadenza_calendario_data: aiClassification.scadenza_calendario_data,
+        scadenza_calendario_descrizione: aiClassification.scadenza_calendario_descrizione,
+    };
 
-            setStatus(`📅 2. Creazione Evento Calendario per "${aiClassification.scadenza_calendario_descrizione}" in corso...`);
+    // 2. Costruzione del body completo della richiesta POST
+    const requestBody = {
+        emailUID: selectedEmail.UID,
+        emailSubject: selectedEmail.SUBJECT, 
+        // Inviamo il corpo completo dell'email per la generazione AI nel backend
+        emailContent: selectedEmail.BODY_TEXT || selectedEmail.BODY_HTML || selectedEmail.PREVIEW, 
+        // Inviamo l'ID utente dinamico, recuperato tramite supabase.auth.getUser()
+        userId: userId, 
+        calendarData: eventData // Oggetto contenente data e descrizione
+    };
 
-            try {
-                const response = await fetch(`${API_URL}/create-calendar-event`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(requestBody),
-                });
+    setStatus(`📅 2. Creazione Evento Calendario per "${aiClassification.scadenza_calendario_descrizione}" in corso...`);
 
-                const data = await response.json();
+    try {
+        const response = await fetch(`${API_URL}/create-calendar-event`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody), // Inviamo il requestBody completo e corretto
+        });
 
-                if (data.success) {
-                    const finalTitle = data.eventTitle || aiClassification.scadenza_calendario_descrizione; 
-                    alfredActions.push(`2. Evento Calendario creato: ${finalTitle}`);
-                } else {
-                    alfredActions.push(`❌ Calendario FALLITO: ${data.error}`);
-                }
-            } catch (error) {
-                alfredActions.push('❌ Errore di connessione al server backend (Calendario).');
-            }
+        const data = await response.json();
+
+        if (data.success) {
+            // Usiamo il titolo generato dall'AI nel backend (se disponibile)
+            const finalTitle = data.eventTitle || aiClassification.scadenza_calendario_descrizione; 
+            alfredActions.push(`2. Evento Calendario creato: ${finalTitle}`);
         } else {
-            alfredActions.push(`2. Creazione Evento in Calendario saltata.`);
+            // Un errore del calendario non blocca le prossime azioni
+            alfredActions.push(`❌ Calendario FALLITO: ${data.error}`);
         }
+    } catch (error) {
+        alfredActions.push('❌ Errore di connessione al server backend (Calendario).');
+    }
+} else if (aiClassification.scadenza_calendario_data !== "NULL") {
+    // Caso in cui la classificazione AI ha trovato una data, ma l'utente ha disabilitato l'azione
+    alfredActions.push(`2. Creazione Evento in Calendario saltata per scelta utente.`);
+}
 
-        // 3. INSERIMENTO IN TODO-LIST
-        if (aiActionFlags.createTodo && aiClassification.azione_todo !== "NULL" && aiClassification.azione_todo) {
+       // 3. INSERIMENTO IN TODO-LIST - [MODIFICATO]
+        if (aiActionFlags.createTodo && aiClassification.azione_todo !== "NULL" && aiClassification.azione_todo) {
+            
             const todoTask = aiClassification.azione_todo;
 
             setStatus(`📝 3. Inserimento Compito ToDo: "${todoTask}" in corso...`);
             
             try {
-                const response = await fetch(`${API_URL}/create-todo`, {
+                const response = await fetch(`${API_URL}/create-todo`, { // NUOVA ROTTA PER TODO
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         userId: userId, 
                         task: todoTask, 
-                        emailReference: selectedEmail.SUBJECT,
+                        emailReference: selectedEmail.SUBJECT, // Aggiungiamo l'oggetto come riferimento
                     }),
                 });
 
@@ -686,15 +734,16 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
             } catch (error) {
                 alfredActions.push('❌ Errore di connessione al server backend (ToDo List).');
             }
-        } else {
-            alfredActions.push(`3. Inserimento in ToDo List saltato.`);
-        }
+        } else if (aiClassification.azione_todo !== "NULL") {
+            alfredActions.push(`3. Inserimento in ToDo List saltato per scelta utente.`);
+        }
 
         // 4. ARCHIVIAZIONE DOCUMENTO ALLEGATO
         if (aiActionFlags.archiveDoc && aiClassification.documento_rilevante) {
+            // TODO: Aggiungere logica di chiamata API (e.g., /archive-document)
             alfredActions.push(`4. [TO DO] Archiviazione Documento/Allegato Rilevante (Modulo 8).`);
-        } else {
-            alfredActions.push(`4. Archiviazione Documento/Allegato saltata.`);
+        } else if (aiClassification.documento_rilevante) {
+            alfredActions.push(`4. Archiviazione Documento/Allegato saltata per scelta utente.`);
         }
 
         // Finalizzazione
@@ -753,7 +802,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
                     </div>
                 );
         }
-    }, [currentMode, sendData, loading, isAiLoading, unreadEmails, timeFilter, selectedEmail, aiDraft, aiClassification, aiActionFlags, handleSendEmail, handleReadEmail, handleAICall, confirmMove]);
+    }, [currentMode, sendData, loading, isAiLoading, unreadEmails, timeFilter, selectedEmail, aiDraft, aiClassification, aiActionFlags, handleSendEmail, handleReadEmail, handleAICall, confirmMove, setSendData, setStatus, setIsAiLoading, setAiDraft, setSelectedEmail, setAiClassification, setTimeFilter, setCurrentMode, setAiActionFlags]);
 
     return (
         <div className="module-container email-module">
@@ -781,7 +830,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
             
             {renderContent}
             
-            <p className="note">Backend URL: {API_URL}</p>
+            <p className="note">Backend URL: {BACKEND_URL}</p>
         </div>
     );
 };

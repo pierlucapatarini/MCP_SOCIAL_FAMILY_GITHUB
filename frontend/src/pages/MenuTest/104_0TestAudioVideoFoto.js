@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Loader, Music, Image, Film, ArrowLeft, Server, Zap, TrendingUp } from 'lucide-react';
 import '../../styles/Pagina104Stile.css'; 
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 export default function ExportTestAudioVideo() {
     const navigate = useNavigate();
     const [testKey, setTestKey] = useState('hf_kan'); 

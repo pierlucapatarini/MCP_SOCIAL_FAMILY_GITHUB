@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from "../../supabaseClient"; 
 import '../../styles/StileSottoPagina20_23.css'; 
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 // Variabili di configurazione
 var __app_id = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 var __initial_auth_token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;

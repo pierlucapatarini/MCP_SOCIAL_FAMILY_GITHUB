@@ -4,6 +4,8 @@ import { supabase } from '../../supabaseClient';
 import '../../styles/MainStyle.css';
 import '../../styles/StilePagina16_03.css';
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 const Pagina16_03NoteScritteDettate = () => {
   const navigate = useNavigate();
   
