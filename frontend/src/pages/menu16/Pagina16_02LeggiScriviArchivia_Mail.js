@@ -69,7 +69,7 @@ const AIWriteMailComponent = ({ sendData, setSendData, handleSendEmail, loading,
         setStatus("Richiesta di riscrittura formale ad Alfred in corso...");
         
         try {
-            const response = await fetch(`${API_URL}/email/ai-draft-rewrite`, {
+            const response = await fetch(`${API_URL}/api/email/ai-draft-rewrite`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -172,7 +172,7 @@ const ReadMailComponent = ({
         ).join(" ");
         
         try {
-            const response = await fetch(`${API_URL}/email/tts`, {
+            const response = await fetch(`${API_URL}/api/email/tts`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text: `Hai ${unreadEmails.length} email non lette. Le prime ${Math.min(5, unreadEmails.length)} sono: ${summaryText}` })
@@ -470,7 +470,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
                 return;
             }
 
-            const response = await fetch(`${API_URL}/email/send`, {
+            const response = await fetch(`${API_URL}/api/email/send`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ to: toFinal, subject: subjectFinal, body: bodyFinal })
@@ -511,7 +511,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
         setAiActionFlags({ moveImap: false, createEvent: false, createTodo: false, archiveDoc: false });
         
         try {
-            const response = await fetch(`${API_URL}/email?timeFilter=${timeFilter}`, { method: 'GET' });
+            const response = await fetch(`${API_URL}/api/email?timeFilter=${timeFilter}`, { method: 'GET' });
             const data = await response.json();
             
             if (response.ok && data.success) {
@@ -538,7 +538,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
         setStatus(`Richiesta ${action} AI in corso...`);
         
         try {
-            const response = await fetch(`${API_URL}/email/ai-response`, {
+            const response = await fetch(`${API_URL}/api/email/ai-response`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ emailContent: email, userAction: action })
@@ -592,7 +592,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
             const folderName = aiClassification.categoria_archiviazione; 
             setStatus(`📦 1. Spostamento IMAP in "${folderName}" in corso...`);
             try {
-                const response = await fetch(`${API_URL}/email/move`, {
+                const response = await fetch(`${API_URL}/api/email/move`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ uid: Number(uid), folderName: folderName.trim() }),
@@ -637,7 +637,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
             setStatus(`📅 2. Creazione Evento Calendario per "${aiClassification.scadenza_calendario_descrizione}" in corso...`);
 
             try {
-                const response = await fetch(`${API_URL}/email/create-calendar-event`, {
+                const response = await fetch(`${API_URL}/api/email/create-calendar-event`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(requestBody),
@@ -665,7 +665,7 @@ const Pagina16_02LeggiScriviArchivia_Mail = () => {
             setStatus(`📝 3. Inserimento Compito ToDo: "${todoTask}" in corso...`);
             
             try {
-                const response = await fetch(`${API_URL}/email/create-todo`, {
+                const response = await fetch(`${API_URL}/api/email/create-todo`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
