@@ -5,6 +5,8 @@ import moment from 'moment';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import '../../styles/StileSottoPagina3_4.css';
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 function FunAnalisiAndamentoPeso() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);

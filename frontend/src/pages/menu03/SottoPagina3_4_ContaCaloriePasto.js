@@ -4,6 +4,8 @@ import { supabase } from '../../supabaseClient';
 import moment from 'moment';
 import '../../styles/StilePagina3.css';
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 function FunContacalorie() {
     const navigate = useNavigate();
     const [inputText, setInputText] = useState('');
@@ -126,7 +128,7 @@ function FunContacalorie() {
         setShowMacros(false);
 
         try {
-            const response = await fetch('api/contacalorie', {
+            const response = await fetch('${API_URL}/api/contacalorie', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ mealText: inputText } )

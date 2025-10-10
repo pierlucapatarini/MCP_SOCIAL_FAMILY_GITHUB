@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../../styles/StilePagina01_03.css"; 
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 export default function SottoPagina01_03_OfferteVolantini() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ export default function SottoPagina01_03_OfferteVolantini() {
     setCurrentStore(store);
     setResult({ error: `Test scraping ${store} in corso...` }); 
     try {
-      const res = await fetch(`api/offerte-volantini/test-${method}/${store}`);
+      const res = await fetch(`${API_URL}/api/offerte-volantini/test-${method}/${store}`);
       if (!res.ok) throw new Error(`Errore caricamento: ${res.status}`);
       const data = await res.json();
       setResult({ data: data.html }); 
@@ -36,7 +38,7 @@ export default function SottoPagina01_03_OfferteVolantini() {
     setCurrentStore(store);
 
     const address = addresses[selectedAddress];
-    let apiUrl = `api/offerte-volantini/${store}`;
+    let apiUrl = `${API_URL}/api/offerte-volantini/${store}`;
 
     // 🔹 Invio dell’indirizzo anche a Lidl e Carrefour
     if (["carrefour", "lidl"].includes(store)) {

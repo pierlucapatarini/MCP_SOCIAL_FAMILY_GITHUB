@@ -4,6 +4,8 @@ import { Camera, Upload, ChefHat, Loader, X, ArrowLeft, Plus, Trash2, Search, Za
 import { useNavigate } from 'react-router-dom';
 import '../../styles/StileSottoPagina3_6.css';
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 const SottoPagina3_6AnalizzaFrigoDispensaTrovaRicette = () => {
     const [images, setImages] = useState([]);
     const [imagePreviews, setImagePreviews] = useState([]);

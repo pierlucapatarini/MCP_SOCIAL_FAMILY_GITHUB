@@ -5,6 +5,8 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid'; 
 import '../styles/MainStyle.css';
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 // MODIFICA RICHIESTA 2: Definizione delle categorie
 const DOCUMENT_CATEGORIES = [
     'bollette',
@@ -342,7 +344,7 @@ function ArchivioDocumenti() {
 
                         // 3. Avvia il processo di ingestione sul backend usando i dati appena salvati
                         console.log("Avvio del processo di ingestione sul server...");
-                        const response = await axios.post('/api/process-document', {
+                        const response = await axios.post('${API_URL}/api/process-document', {
                             familyGroup: familyGroup,
                             fileName: originalFileName, 
                             fileUrl: alfredFileUrl,

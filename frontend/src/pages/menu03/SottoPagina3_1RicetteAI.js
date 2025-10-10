@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/MainStyle.css';
 import '../../styles/StilePagina3.css'; // Aggiornato per isolare gli stili
 
+
+const API_URL = process.env.REACT_APP_API_URL; 
+
 function FunRecipeAI() {
     // STATI PER L'AI E LE RICETTE
     // ✨ FIX CRITICO: Rimosso il setter duplicato che causava il SyntaxError
@@ -103,12 +106,13 @@ function FunRecipeAI() {
         setLoading(true);
 
         try {
-            // FIX: URL completo con porta 3001
-            const response = await fetch('api/recipe/extract-ingredients', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ recipeText }),
-            });
+            // OLD: const response = await fetch('${API_URL}/api/recipe/extract-ingredients', {
+// NEW:
+const response = await fetch(`${API_URL}/api/recipe/extract-ingredients`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ recipeText }),
+});
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({ error: 'Errore generico dal server o risposta non JSON.' }));
@@ -144,7 +148,7 @@ function FunRecipeAI() {
 
         try {
             // FIX: URL completo con porta 3001
-            const response = await fetch('api/recipe/generate-instructions', {
+            const response = await fetch('${API_URL}/api/recipe/generate-instructions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ recipeText }),

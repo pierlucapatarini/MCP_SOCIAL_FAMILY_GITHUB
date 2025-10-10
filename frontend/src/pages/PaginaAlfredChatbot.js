@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Send, X, MessageSquare } from 'lucide-react';
 import '../styles/AlfredChatbot.css'; // Assicurati che il percorso al CSS sia corretto
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 // Componente per l'avatar di Alfred (puoi personalizzarlo)
 const AlfredAvatar = () => (
     <div className="alfred-avatar">
@@ -51,7 +53,7 @@ const AlfredChatbot = () => {
 
         try {
             // La chiamata al backend che hai già configurato
-            const response = await fetch('/api/alfred-chat', {
+            const response = await fetch('${API_URL}/api//alfred-chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: text }),
