@@ -128,7 +128,7 @@ function FunContacalorie() {
         setShowMacros(false);
 
         try {
-            const response = await fetch('${API_URL}/api/contacalorie', {
+            const response = await fetch(`${API_URL}/api/contacalorie`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ mealText: inputText } )

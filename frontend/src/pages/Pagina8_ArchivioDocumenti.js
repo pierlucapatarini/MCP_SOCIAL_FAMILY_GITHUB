@@ -344,7 +344,7 @@ function ArchivioDocumenti() {
 
                         // 3. Avvia il processo di ingestione sul backend usando i dati appena salvati
                         console.log("Avvio del processo di ingestione sul server...");
-                        const response = await axios.post('${API_URL}/api/process-document', {
+                        const response = await axios.post(`${API_URL}/api/process-document`, {
                             familyGroup: familyGroup,
                             fileName: originalFileName, 
                             fileUrl: alfredFileUrl,

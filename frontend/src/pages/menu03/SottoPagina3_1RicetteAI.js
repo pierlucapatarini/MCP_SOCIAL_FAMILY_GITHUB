@@ -106,7 +106,7 @@ function FunRecipeAI() {
         setLoading(true);
 
         try {
-            // OLD: const response = await fetch('${API_URL}/api/recipe/extract-ingredients', {
+            // OLD: const response = await fetch(`${API_URL}/api/recipe/extract-ingredients`, {
 // NEW:
 const response = await fetch(`${API_URL}/api/recipe/extract-ingredients`, {
     method: 'POST',
@@ -148,7 +148,7 @@ const response = await fetch(`${API_URL}/api/recipe/extract-ingredients`, {
 
         try {
             // FIX: URL completo con porta 3001
-            const response = await fetch('${API_URL}/api/recipe/generate-instructions', {
+            const response = await fetch(`${API_URL}/api/recipe/generate-instructions`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ recipeText }),

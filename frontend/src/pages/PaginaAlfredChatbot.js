@@ -53,7 +53,7 @@ const AlfredChatbot = () => {
 
         try {
             // La chiamata al backend che hai già configurato
-            const response = await fetch('${API_URL}/api//alfred-chat', {
+            const response = await fetch(`${API_URL}/api//alfred-chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: text }),

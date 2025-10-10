@@ -14,7 +14,7 @@ export default function FunctionMetadataCatalog() {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch("${API_URL}/api/catalog");
+            const res = await fetch(`${API_URL}/api/catalog`);
             if (!res.ok) throw new Error('Errore nel recupero del catalogo.');
             const data = await res.json();
             setTables(data);
@@ -57,7 +57,7 @@ export default function FunctionMetadataCatalog() {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch("${API_URL}/api/catalog/refresh", { method: "POST" });
+            const res = await fetch(`${API_URL}/api/catalog/refresh`, { method: "POST" });
             if (!res.ok) throw new Error('Errore nella richiesta di refresh.');
 
             alert("Richiesta di refresh inviata. Caricamento in corso...");
