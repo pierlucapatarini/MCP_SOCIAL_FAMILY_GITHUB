@@ -1,0 +1,180 @@
+/*
+ * FILE: StilePagina16_07.css (SPECIFICO PROGRAMMI TV)
+ * Eredita i colori e le variabili da MainStyle.css
+ */
+
+/* Header Unico Pagina TV */
+.header-tv-container {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--primary-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-title-tv {
+    font-size: 2em;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--surface-color);
+    margin: 8px 0 4px;
+}
+
+/* Controlli e Filtri */
+.controls-container-tv {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 16px;
+    background-color: var(--background-color); 
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Pulsante Toggle Vista Preferiti */
+.btn-toggle-view {
+    /* Eredita gran parte dello stile da .btn-primary, aggiunge solo il minimo */
+    padding: 12px 20px;
+    border-radius: 9999px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.active-favorite {
+    background-color: var(--primary-light); 
+    color: white;
+}
+
+.inactive-default {
+    background-color: #f0f0f0; 
+    color: var(--text-color);
+    border: 1px solid #ccc;
+}
+
+/* Selettore Giorno */
+.day-selector-container {
+    margin-bottom: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+}
+
+.day-tabs-scroll {
+    display: inline-flex;
+    gap: 8px;
+    padding: 8px;
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.day-tab-button {
+    padding: 8px 12px;
+    min-width: 60px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.active-day {
+    background-color: var(--secondary-color); 
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 137, 123, 0.4);
+}
+
+/* Program Card - Layout e Stile Complesso */
+.program-card {
+    background-color: var(--surface-color);
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    border-left: 4px solid var(--primary-light); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+@media (min-width: 768px) {
+    .program-card {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.program-title-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.program-details-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.9em;
+    color: var(--text-light);
+    flex-wrap: wrap;
+}
+
+/* Tag Generi (Utilizziamo la palette) */
+.program-genre-tag {
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: none; 
+}
+@media (min-width: 640px) {
+    .program-genre-tag {
+        display: block;
+    }
+}
+
+/* Mappatura Colori per i Tag */
+.genre-film { background-color: #ffebee; color: #c62828; }
+.genre-notizie { background-color: #e3f2fd; color: #1565c0; }
+/* ... (Aggiungere tutte le altre classi genere qui) ... */
+.genre-default { background-color: #f5f5f5; color: #757575; }
+
+/* Pulsante Preferito */
+.btn-favorite {
+    padding: 8px;
+    border-radius: 9999px;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+}
+
+.favorite-active {
+    background-color: var(--error-color); 
+    color: white;
+}
+.favorite-inactive {
+    background-color: #e0e0e0;
+    color: var(--text-light);
+}

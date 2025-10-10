@@ -1,0 +1,229 @@
+/* -------------------------------------------------------------------------- */
+/* Base Layout Styles                              */
+/* -------------------------------------------------------------------------- */
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f7f9; /* Sfondo leggero */
+}
+
+.header-mobile-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+.scrollable-content {
+    flex-grow: 1;
+    padding: 1rem;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.loading-screen {
+    /* Tailwind classes are usually sufficient here (p-8, text-lg, etc.) */
+    color: #3b82f6; /* Blue 500 */
+}
+
+/* -------------------------------------------------------------------------- */
+/* Grid & Card Styles                              */
+/* -------------------------------------------------------------------------- */
+
+.grid-container {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 1rem 0;
+}
+
+@media (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid;
+    width: 100%;
+}
+
+/* Colori specifici per scenario */
+.card-title.chat {
+    color: #3b82f6; /* Blue */
+    border-color: #93c5fd;
+}
+
+.card-title.event {
+    color: #10b981; /* Green */
+    border-color: #6ee7b7;
+}
+
+.card-title.stock {
+    color: #f59e0b; /* Amber/Yellow */
+    border-color: #fcd34d;
+}
+
+.card-title.voice {
+    color: #8b5cf6; /* Violet */
+    border-color: #c4b5fd;
+}
+
+.test-data-info {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+    background-color: #f9fafb;
+    padding: 0.5rem;
+    border-radius: 6px;
+    width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Button Styles                               */
+/* -------------------------------------------------------------------------- */
+
+.btn-base {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+    width: 100%;
+    margin-top: auto; /* Per allineare i pulsanti in fondo alle card */
+}
+
+.btn-base:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+
+.green-scenario {
+    background-color: #10b981;
+    color: white;
+}
+
+.green-scenario:hover {
+    background-color: #059669;
+}
+
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+}
+
+.btn-action {
+    background-color: #8b5cf6;
+    color: white;
+}
+
+.btn-action:hover {
+    background-color: #7c3aed;
+}
+
+.btn-secondary {
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    border-radius: 6px;
+    background-color: transparent;
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+}
+
+.btn-secondary:hover {
+    background-color: #e5e7eb;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Log Styles                                  */
+/* -------------------------------------------------------------------------- */
+
+.log-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.log-content {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px; /* Spazio per la scrollbar */
+}
+
+.log-entry {
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed #e5e7eb;
+    font-family: monospace;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-timestamp {
+    color: #9ca3af;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.log-error {
+    color: #dc2626; /* Red 600 */
+    background-color: #fee2e2; /* Red 100 */
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.log-success {
+    color: #15803d; /* Green 600 */
+    background-color: #dcfce7; /* Green 100 */
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+/* Aggiungere log-warning se necessario */
+.log-warning {
+    color: #b45309; /* Amber 700 */
+    background-color: #fef3c7; /* Amber 100 */
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}

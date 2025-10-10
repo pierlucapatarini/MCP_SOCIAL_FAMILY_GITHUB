@@ -1,0 +1,123 @@
+Data,Giorno,Sigla Rifiuto,Tipo Rifiuto Esteso
+01/09/2025,LUNEDI,PLASTICA,Plastica
+02/09/2025,MARTEDI,ORG,Organico
+03/09/2025,MERCOLEDI,SFALCI,Sfalci e Potature
+04/09/2025,GIOVEDI,NON REC,Non Riciclabile
+05/09/2025,VENERDI,ORG,Organico
+06/09/2025,SABATO,Non Specificato,Non Specificato
+07/09/2025,DOMENICA,Non Specificato,Non Specificato
+08/09/2025,LUNEDI,Non Specificato,Non Specificato
+09/09/2025,MARTEDI,ORG,Organico
+10/09/2025,MERCOLEDI,Non Specificato,Non Specificato
+11/09/2025,GIOVEDI,CARTA,Carta e Cartone
+12/09/2025,VENERDI,ORG,Organico
+13/09/2025,SABATO,Non Specificato,Non Specificato
+14/09/2025,DOMENICA,Non Specificato,Non Specificato
+15/09/2025,LUNEDI,Non Specificato,Non Specificato
+16/09/2025,MARTEDI,ORG-LAV,Organico + Lavaggio Contenitore
+17/09/2025,MERCOLEDI,SFALCI,Sfalci e Potature
+18/09/2025,GIOVEDI,NON REC,Non Riciclabile
+19/09/2025,VENERDI,ORG,Organico
+20/09/2025,SABATO,VETRO,Vetro
+21/09/2025,DOMENICA,Non Specificato,Non Specificato
+22/09/2025,LUNEDI,PLASTICA,Plastica
+23/09/2025,MARTEDI,ORG,Organico
+24/09/2025,MERCOLEDI,Non Specificato,Non Specificato
+25/09/2025,GIOVEDI,CARTA,Carta e Cartone
+26/09/2025,VENERDI,ORG,Organico
+27/09/2025,SABATO,Non Specificato,Non Specificato
+28/09/2025,DOMENICA,Non Specificato,Non Specificato
+29/09/2025,LUNEDI,Non Specificato,Non Specificato
+30/09/2025,MARTEDI,ORG,Organico
+01/10/2025,MERCOLEDI,Non Specificato,Non Specificato
+02/10/2025,GIOVEDI,NON REC,Non Riciclabile
+03/10/2025,VENERDI,Non Specificato,Non Specificato
+04/10/2025,SABATO,Non Specificato,Non Specificato
+05/10/2025,DOMENICA,Non Specificato,Non Specificato
+06/10/2025,LUNEDI,Non Specificato,Non Specificato
+07/10/2025,MARTEDI,ORG-LAV,Organico + Lavaggio Contenitore
+08/10/2025,MERCOLEDI,Non Specificato,Non Specificato
+09/10/2025,GIOVEDI,CARTA,Carta e Cartone
+10/10/2025,VENERDI,Non Specificato,Non Specificato
+11/10/2025,SABATO,VETRO,Vetro
+12/10/2025,DOMENICA,Non Specificato,Non Specificato
+13/10/2025,LUNEDI,PLASTICA,Plastica
+14/10/2025,MARTEDI,ORG,Organico
+15/10/2025,MERCOLEDI,SFALCI,Sfalci e Potature
+16/10/2025,GIOVEDI,NON REC,Non Riciclabile
+17/10/2025,VENERDI,Non Specificato,Non Specificato
+18/10/2025,SABATO,Non Specificato,Non Specificato
+19/10/2025,DOMENICA,Non Specificato,Non Specificato
+20/10/2025,LUNEDI,Non Specificato,Non Specificato
+21/10/2025,MARTEDI,ORG,Organico
+22/10/2025,MERCOLEDI,Non Specificato,Non Specificato
+23/10/2025,GIOVEDI,CARTA,Carta e Cartone
+24/10/2025,VENERDI,Non Specificato,Non Specificato
+25/10/2025,SABATO,Non Specificato,Non Specificato
+26/10/2025,DOMENICA,Non Specificato,Non Specificato
+27/10/2025,LUNEDI,Non Specificato,Non Specificato
+28/10/2025,MARTEDI,ORG-LAV,Organico + Lavaggio Contenitore
+29/10/2025,MERCOLEDI,Non Specificato,Non Specificato
+30/10/2025,GIOVEDI,NON REC,Non Riciclabile
+31/10/2025,VENERDI,Non Specificato,Non Specificato
+01/11/2025,SABATO,Non Specificato,Non Specificato
+02/11/2025,DOMENICA,VETRO,Vetro
+03/11/2025,LUNEDI,PLASTICA,Plastica
+04/11/2025,MARTEDI,ORG,Organico
+05/11/2025,MERCOLEDI,Non Specificato,Non Specificato
+06/11/2025,GIOVEDI,CARTA,Carta e Cartone
+07/11/2025,VENERDI,Non Specificato,Non Specificato
+08/11/2025,SABATO,Non Specificato,Non Specificato
+09/11/2025,DOMENICA,Non Specificato,Non Specificato
+10/11/2025,LUNEDI,Non Specificato,Non Specificato
+11/11/2025,MARTEDI,ORG,Organico
+12/11/2025,MERCOLEDI,SFALCI,Sfalci e Potature
+13/11/2025,GIOVEDI,NON REC,Non Riciclabile
+14/11/2025,VENERDI,Non Specificato,Non Specificato
+15/11/2025,SABATO,Non Specificato,Non Specificato
+16/11/2025,DOMENICA,Non Specificato,Non Specificato
+17/11/2025,LUNEDI,Non Specificato,Non Specificato
+18/11/2025,MARTEDI,ORG-LAV,Organico + Lavaggio Contenitore
+19/11/2025,MERCOLEDI,Non Specificato,Non Specificato
+20/11/2025,GIOVEDI,CARTA,Carta e Cartone
+21/11/2025,VENERDI,Non Specificato,Non Specificato
+22/11/2025,SABATO,VETRO,Vetro
+23/11/2025,DOMENICA,Non Specificato,Non Specificato
+24/11/2025,LUNEDI,PLASTICA,Plastica
+25/11/2025,MARTEDI,ORG,Organico
+26/11/2025,MERCOLEDI,Non Specificato,Non Specificato
+27/11/2025,GIOVEDI,NON REC,Non Riciclabile
+28/11/2025,VENERDI,Non Specificato,Non Specificato
+29/11/2025,SABATO,Non Specificato,Non Specificato
+30/11/2025,DOMENICA,Non Specificato,Non Specificato
+01/12/2025,LUNEDI,Non Specificato,Non Specificato
+02/12/2025,MARTEDI,ORG,Organico
+03/12/2025,MERCOLEDI,SFALCI,Sfalci e Potature
+04/12/2025,GIOVEDI,CARTA,Carta e Cartone
+05/12/2025,VENERDI,Non Specificato,Non Specificato
+06/12/2025,SABATO,Non Specificato,Non Specificato
+07/12/2025,DOMENICA,Non Specificato,Non Specificato
+08/12/2025,LUNEDI,Non Specificato,Non Specificato
+09/12/2025,MARTEDI,ORG-LAV,Organico + Lavaggio Contenitore
+10/12/2025,MERCOLEDI,Non Specificato,Non Specificato
+11/12/2025,GIOVEDI,NON REC,Non Riciclabile
+12/12/2025,VENERDI,Non Specificato,Non Specificato
+13/12/2025,SABATO,VETRO,Vetro
+14/12/2025,DOMENICA,Non Specificato,Non Specificato
+15/12/2025,LUNEDI,PLASTICA,Plastica
+16/12/2025,MARTEDI,ORG,Organico
+17/12/2025,MERCOLEDI,Non Specificato,Non Specificato
+18/12/2025,GIOVEDI,CARTA,Carta e Cartone
+19/12/2025,VENERDI,Non Specificato,Non Specificato
+20/12/2025,SABATO,Non Specificato,Non Specificato
+21/12/2025,DOMENICA,Non Specificato,Non Specificato
+22/12/2025,LUNEDI,Non Specificato,Non Specificato
+23/12/2025,MARTEDI,ORG-LAV,Organico + Lavaggio Contenitore
+24/12/2025,MERCOLEDI,Non Specificato,Non Specificato
+25/12/2025,GIOVEDI,Non Specificato,Non Specificato
+26/12/2025,VENERDI,Non Specificato,Non Specificato
+27/12/2025,SABATO,NON REC,Non Riciclabile
+28/12/2025,DOMENICA,Non Specificato,Non Specificato
+29/12/2025,LUNEDI,Non Specificato,Non Specificato
+30/12/2025,MARTEDI,ORG,Organico
+31/12/2025,MERCOLEDI,Non Specificato,Non Specificato

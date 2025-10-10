@@ -1,0 +1,234 @@
+/* Stile_Menu20.css: Stili per Pagina20_21_LeggiNotizieMondo */
+
+/* Contenitore principale della pagina Notizie */
+.pagina20-container { /* Nome specifico per il container principale (Pagina20) */
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.pagina20-container h1 {
+    color: #004a7c; /* Alfred Blue */
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pagina20-description-text {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* --- Sezione Interazione e Filtri --- */
+
+.pagina20-filters-section {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.pagina20-filters-section h3 {
+    color: #004a7c;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+/* Pulsante vocale di Alfred */
+.pagina20-alfred-voice-button {
+    background-color: #007bff; /* Blu primario */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pagina20-alfred-voice-button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.pagina20-alfred-voice-button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+/* Contenitori per i gruppi di filtri (Categorie e Tempo) */
+.pagina20-category-filters, .pagina20-time-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+/* Pulsanti dei filtri */
+.pagina20-filter-button {
+    background-color: #f8f9fa;
+    color: #004a7c;
+    border: 1px solid #ced4da;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95em;
+    white-space: nowrap; /* Evita interruzioni di riga sui nomi dei filtri */
+}
+
+.pagina20-filter-button:hover:not(.active):not(:disabled) {
+    background-color: #e2e6ea;
+    border-color: #adb5bd;
+}
+
+.pagina20-filter-button.active {
+    background-color: #28a745; /* Verde per selezionato */
+    color: white;
+    border-color: #28a745;
+    font-weight: bold;
+}
+
+/* Pulsante per generare il riepilogo */
+.pagina20-generate-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.pagina20-generate-button:hover:not(:disabled) {
+    background-color: #1e7e34;
+}
+
+.pagina20-generate-button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+/* --- Sezione Output del Riepilogo --- */
+
+.pagina20-output-section {
+    margin-top: 30px;
+}
+
+.pagina20-output-section h2 {
+    color: #004a7c;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #ced4da;
+    padding-bottom: 5px;
+}
+
+.pagina20-error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.pagina20-summary-content {
+    background-color: #ffffff;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Controlli Audio */
+.pagina20-audio-player-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+.pagina20-listening-prompt {
+    font-weight: bold;
+    color: #495057;
+}
+
+.pagina20-audio-player-controls audio {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+/* Testo del Riepilogo (Renderizzazione Markdown) */
+.pagina20-text-output {
+    line-height: 1.6;
+    font-size: 1.05em;
+}
+
+.pagina20-text-output h2 { /* Stili per le sezioni di Alfred (es. Mondo Occidentale) */
+    color: #004a7c;
+    border-bottom: 1px solid #ced4da;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.pagina20-text-output ul {
+    list-style-type: '👉 '; /* Simbolo carino per gli elenchi */
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.pagina20-text-output li {
+    margin-bottom: 12px;
+}
+
+.pagina20-text-output strong {
+    color: #004a7c; /* Rende in grassetto le sezioni (es. Politica) */
+    font-weight: 700;
+}
+
+/* Stile_Menu20.css - MIGLIORATO PER ALFRED NEWS */
+
+.pagina20-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.pagina20-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.pagina20-header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+
+    }

@@ -1,0 +1,262 @@
+/* ======================================================= */
+/* 🟢 STILE PAGINA 16: Copia Notebook LLM                   */
+/* Versione Pulita e Consolidata per Debugging             */
+/* ======================================================= */
+
+/* Contenitore Principale */
+.pagina16-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa; /* Sfondo generale molto chiaro */
+    color: #343a40;
+    min-height: 100vh;
+}
+
+/* Intestazione */
+.pagina16-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 1.5rem;
+}
+
+.pagina16-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 0.5rem;
+}
+
+.pagina16-header p {
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+/* Sezioni Dati (Input/Output) */
+.pagina16-section {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+/* Dropzone per File */
+.pagina16-dropzone {
+    border: 2px dashed #007bff;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.pagina16-dropzone:hover,
+.pagina16-dropzone.active {
+    background-color: #e9f0f9;
+    border-color: #0056b3;
+}
+
+/* Separatore "O" */
+.pagina16-separator {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.pagina16-separator span {
+    background: #ffffff;
+    padding: 0 15px;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+/* Registratore Vocale */
+.pagina16-voice-recorder {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.pagina16-mic-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagina16-mic-button:hover {
+    background-color: #1e7e34;
+}
+
+.pagina16-mic-button.recording {
+    background-color: #dc3545; /* Rosso durante la registrazione */
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}
+
+/* Anteprima File */
+.pagina16-file-preview {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.pagina16-remove-file {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.1s;
+}
+
+.pagina16-remove-file:hover {
+    color: #a71d2a;
+}
+
+/* Bottone Processo */
+.pagina16-process-section button {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.pagina16-process-section button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.pagina16-process-section button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Messaggi di Errore */
+.pagina16-error-message {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Spinner di Caricamento */
+.pagina16-loading-spinner {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.pagina16-loading-spinner .spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Output Sezione */
+.pagina16-output-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.pagina16-output-panel {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.pagina16-summary-text {
+    line-height: 1.6;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.pagina16-mindmap-container {
+    height: 450px;
+    width: 100%;
+}
+
+.pagina16-audio-player {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+/* Salvataggio */
+.pagina16-save-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.pagina16-save-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+    margin: 0 auto;
+}
+
+.pagina16-save-button:hover {
+    background-color: #1e7e34;
+}
+
+/* Media Query base per la responsività */
+@media (max-width: 768px) {
+    .pagina16-container {
+        padding: 1rem;
+    }
+    .pagina16-output-grid {
+        grid-template-columns: 1fr;
+    }
+}

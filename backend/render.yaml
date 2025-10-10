@@ -1,0 +1,22 @@
+# backend/render.yaml
+services:
+  - type: web
+    name: family-management-backend # Il nome del servizio su Render
+    env: node
+    # Sostituisci [il-tuo-utente/repo-name] con i tuoi dati
+    repo: https://github.com/[il-tuo-utente]/[repo-name] 
+    # Render deve guardare solo qui
+    rootDir: backend 
+    # Comando di build
+    buildCommand: npm install
+    # Comando di avvio (quello che abbiamo creato in server/server.js)
+    startCommand: npm start 
+    # Piano gratuito
+    plan: free 
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # ⚠️ RENDER USERÀ QUESTA PORTA AUTOMATICAMENTE
+      - key: PORT
+        value: 10000 
+      # Aggiungeremo qui le tue chiavi API nel Passo 3

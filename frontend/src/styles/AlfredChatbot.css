@@ -1,0 +1,204 @@
+/* PERCORSO: src/styles/AlfredChatbot.css */
+
+/* Contenitore principale del widget */
+.alfred-widget-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Pulsante flottante (FAB) */
+.alfred-fab {
+    background-color: #DC3545; /* Colore principale (rosso) */
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.alfred-fab:hover {
+    transform: scale(1.1);
+    background-color: #c82333; /* Rosso più scuro al passaggio del mouse */
+}
+
+/* Finestra della chat */
+.chat-window {
+    position: absolute;
+    bottom: 80px; /* Posizionato sopra il FAB */
+    right: 0;
+    width: 370px;
+    height: 500px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: bottom right;
+}
+
+.chat-window.open {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Header della chat */
+.chat-header {
+    background-color: #DC3545; /* Colore principale (rosso) */
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.alfred-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-text h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.header-text p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.close-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+.close-btn:hover {
+    opacity: 1;
+}
+
+/* Corpo della chat (messaggi) */
+.chat-body {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f4f7f9;
+}
+
+.message-bubble-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    max-width: 85%;
+}
+
+.message-bubble {
+    padding: 10px 15px;
+    border-radius: 18px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.message-bubble p {
+    margin: 0;
+}
+
+/* Messaggi ricevuti (Alfred) */
+.message-bubble-wrapper.received {
+    align-self: flex-start;
+}
+.message-bubble-wrapper.received .message-bubble {
+    background-color: #e9ecef;
+    color: #333;
+    border-top-left-radius: 5px;
+}
+
+/* Messaggi inviati (Utente) */
+.message-bubble-wrapper.sent {
+    margin-left: auto; /* Allinea a destra */
+}
+.message-bubble-wrapper.sent .message-bubble {
+    background-color: #DC3545; /* Colore principale (rosso) */
+    color: white;
+    border-top-right-radius: 5px;
+}
+
+/* Footer della chat (input) */
+.chat-footer {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #e9ecef;
+    background-color: white;
+    flex-shrink: 0;
+}
+
+.chat-footer input {
+    flex-grow: 1;
+    border: none;
+    background-color: #f4f7f9;
+    padding: 12px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.chat-footer .send-btn {
+    background: none;
+    border: none;
+    color: #DC3545;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 10px;
+    transition: color 0.2s;
+}
+.chat-footer .send-btn:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Indicatore "sta scrivendo" */
+.typing-indicator .dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    background-color: #888;
+    border-radius: 50%;
+    display: inline-block;
+    animation: wave 1.3s linear infinite;
+}
+.typing-indicator .dot:nth-child(2) { animation-delay: -1.1s; }
+.typing-indicator .dot:nth-child(3) { animation-delay: -0.9s; }
+
+@keyframes wave {
+    0%, 60%, 100% { transform: initial; }
+    30% { transform: translateY(-8px); }
+}
+
+/* Scrollbar personalizzata */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background-color: #d1d1d1; border-radius: 3px; }
+.custom-scrollbar::-webkit-scrollbar-track { background-color: transparent; }

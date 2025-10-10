@@ -1,0 +1,530 @@
+/* Farmaci Management Specific Styles */
+/* Tutti i nomi delle classi sono prefissati con "fm-" per evitare conflitti */
+
+/* Header Actions */
+.fm-header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.fm-btn-add,
+.fm-btn-primary,
+.fm-btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.fm-btn-add {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.fm-btn-add:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.fm-btn-primary {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+}
+
+.fm-btn-primary:hover {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
+}
+
+.fm-btn-secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.fm-btn-secondary:hover {
+  background: #4b5563;
+  transform: translateY(-1px);
+}
+
+/* Calendar Wrapper */
+.fm-calendar-wrapper {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* Modal Styles */
+.fm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.fm-modal-content {
+  background: white;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.fm-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  flex-shrink: 0;
+}
+
+.fm-modal-header h2 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.fm-btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.fm-btn-close:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* Modal Body */
+.fm-modal-body {
+  padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Archivio Container */
+.fm-archivio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Farmaco Card */
+.fm-farmaco-card {
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border: 2px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.fm-farmaco-card:hover {
+  border-color: #6366f1;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.fm-farmaco-card.fm-low-stock {
+  border-color: #ef4444;
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+}
+
+.fm-farmaco-card.fm-low-stock::before {
+  content: "⚠️ SCORTA BASSA";
+  display: block;
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  padding: 0.25rem 0.75rem;
+  background: #fecaca;
+  border-radius: 0.5rem;
+  text-align: center;
+  width: fit-content;
+}
+
+/* Farmaco Header */
+.fm-farmaco-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.fm-farmaco-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fm-farmaco-name::before {
+  content: "💊";
+  font-size: 1.5rem;
+}
+
+.fm-farmaco-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.fm-btn-edit,
+.fm-btn-delete {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.fm-btn-edit:hover {
+  background: #dbeafe;
+  color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.fm-btn-delete:hover {
+  background: #fecaca;
+  color: #dc2626;
+  transform: scale(1.05);
+}
+
+/* Farmaco Content Grid */
+.fm-farmaco-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.fm-farmaco-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+/* Form Groups */
+.fm-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.fm-form-group label {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.fm-input,
+.fm-textarea,
+.fm-select {
+  padding: 0.75rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  background: white;
+  width: 100%;
+}
+
+.fm-input:focus,
+.fm-textarea:focus,
+.fm-select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.fm-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Quantity Indicators */
+.fm-quantity-group {
+  position: relative;
+}
+
+.fm-quantity-indicator {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.fm-quantity-indicator.fm-low {
+  color: #dc2626;
+}
+
+.fm-quantity-indicator.fm-medium {
+  color: #f59e0b;
+}
+
+.fm-quantity-indicator.fm-high {
+  color: #10b981;
+}
+
+/* Modal Footer */
+.fm-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+  flex-shrink: 0;
+}
+
+.fm-footer-left {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.fm-footer-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.fm-save-indicator {
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.fm-save-indicator.fm-has-changes {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+/* Form Modal Styles */
+.fm-form-modal .fm-modal-body {
+  padding: 2rem;
+}
+
+.fm-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Info Box */
+.fm-info-box {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1px solid #93c5fd;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.fm-info-box h2 {
+  color: #1e40af;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.fm-info-box p {
+  color: #1e3a8a;
+  margin: 0;
+}
+
+/* Search and Filter */
+.fm-search-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fm-search-input {
+  flex: 1;
+  min-width: 250px;
+  padding: 0.75rem 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.fm-search-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.fm-filter-select {
+  padding: 0.75rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  background: white;
+}
+
+/* Stats Cards */
+.fm-stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.fm-stat-card {
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  border: 1px solid #bae6fd;
+}
+
+.fm-stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0369a1;
+  margin: 0;
+}
+
+.fm-stat-label {
+  color: #075985;
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .fm-modal-content {
+    max-width: 95vw;
+  }
+  
+  .fm-farmaco-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .fm-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .fm-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .fm-modal-content {
+    margin: 0.5rem;
+    max-height: 95vh;
+  }
+  
+  .fm-modal-body {
+    padding: 1.5rem;
+  }
+  
+  .fm-modal-header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .fm-modal-footer {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .fm-footer-left,
+  .fm-footer-right {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .fm-farmaco-card {
+    padding: 1rem;
+  }
+  
+  .fm-farmaco-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .fm-farmaco-actions {
+    align-self: stretch;
+    justify-content: space-around;
+  }
+  
+  .fm-search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .fm-search-input {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .fm-stats-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .fm-farmaco-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .fm-form-grid {
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,288 @@
+/* ApiKeyValidator.css */
+.api-key-validator {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+.validator-header {
+  text-align: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.validator-header h1 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.validator-header p {
+  color: #7f8c8d;
+  font-size: 16px;
+}
+
+.validator-container {
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.input-section {
+  margin-bottom: 30px;
+}
+
+.config-section {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border-left: 4px solid #3498db;
+}
+
+.config-section h4 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.service-select, .api-key-input, .config-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e1e8ed;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.service-select:focus, .api-key-input:focus, .config-input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+}
+
+.verify-button, .reset-button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.verify-button {
+  background-color: #3498db;
+  color: white;
+  flex: 2;
+}
+
+.verify-button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+.verify-button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.reset-button {
+  background-color: #e74c3c;
+  color: white;
+  flex: 1;
+}
+
+.reset-button:hover {
+  background-color: #c0392b;
+}
+
+.result-section {
+  padding: 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border-left: 5px solid;
+}
+
+.result-section.valid {
+  background-color: #d5f4e6;
+  border-left-color: #2ecc71;
+}
+
+.result-section.invalid {
+  background-color: #fadbd8;
+  border-left-color: #e74c3c;
+}
+
+.result-section h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.result-details p {
+  margin: 8px 0;
+}
+
+.status {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 5px;
+}
+
+.status.valid {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.status.invalid {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.history-section {
+  margin-top: 30px;
+}
+
+.history-section h3 {
+  color: #2c3e50;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 10px;
+}
+
+.history-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+  border-left: 4px solid;
+}
+
+.history-item.valid {
+  border-left-color: #2ecc71;
+}
+
+.history-item.invalid {
+  border-left-color: #e74c3c;
+}
+
+.service-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.service-name {
+  font-weight: 600;
+  min-width: 150px;
+  color: #2c3e50;
+}
+
+.key-preview {
+  flex: 1;
+  color: #7f8c8d;
+  font-family: monospace;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #95a5a6;
+}
+
+.validator-footer {
+  text-align: center;
+  padding: 25px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.service-info {
+  text-align: left;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.service-info h4 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.service-info ul {
+  columns: 2;
+  list-style-type: none;
+  padding: 0;
+}
+
+.service-info li {
+  margin-bottom: 8px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.service-info li:before {
+  content: "•";
+  color: #3498db;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .api-key-validator {
+    padding: 10px;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .history-item {
+    flex-wrap: wrap;
+  }
+  
+  .service-name {
+    min-width: 120px;
+  }
+  
+  .service-info ul {
+    columns: 1;
+  }
+  
+  .config-section {
+    padding: 10px;
+  }
+}

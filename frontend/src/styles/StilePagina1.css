@@ -1,0 +1,248 @@
+/* Stile del contenitore principale, che non deve scorrere */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--surface-color);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+/* Header fisso */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Contenuto scorrevole: qui avviene lo scroll */
+.scrollable-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* Footer fisso */
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  background-color: var(--surface-color);
+  border-top: 1px solid #e0e0e0;
+  padding: 12px 16px;
+  text-align: center;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Layout mobile */
+.tab-buttons {
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tab-button {
+  padding: 8px 14px;
+  font-size: 0.9em;
+}
+
+.input-group {
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.search-input {
+  padding: 10px;
+}
+
+/* Contenitore per i pulsanti di visualizzazione */
+.button-list-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+/* Modifiche alla tabella */
+.shopping-table-container {
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.shopping-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shopping-table thead th {
+  padding: 8px;
+  font-size: 0.9em;
+  text-align: left;
+}
+
+.shopping-table tbody td {
+  padding: 8px;
+  font-size: 0.9em;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Larghezza della colonna 'Articolo' raddoppiata */
+.shopping-table .articolo-column-header,
+.shopping-table .articolo-column-cell {
+  width: 40%;
+}
+
+/* Per le icone e le colonne strette */
+.shopping-table th:nth-child(2), /* 'Preso' */
+.shopping-table td:nth-child(2),
+.shopping-table th:nth-child(3), /* 'Elimina' */
+.shopping-table td:nth-child(3) {
+  width: 1%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Bottone per le icone */
+.btn-icon {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Altri stili */
+.small-input {
+  width: 50px;
+  padding: 6px;
+}
+
+.other-prices-dropdown {
+  font-size: 0.8em;
+}
+
+.taken {
+  background-color: #e8f5e9;
+  text-decoration: line-through;
+  color: #757575;
+}
+
+.sort-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Stili per header compattato */
+.header-mobile-compact {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-mobile-compact h1,
+.header-mobile-compact p {
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-mobile-compact .btn-secondary {
+  order: 1; /* Sposta il pulsante a sinistra */
+}
+
+/* Pulsanti di switch lista: visibili e leggibili */
+.button-list-container .btn-secondary {
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  background-color: #fff;
+  font-weight: 600;
+}
+
+.button-list-container .btn-secondary:hover {
+  background-color: var(--primary-light);
+  color: #fff;
+  border-color: var(--primary-light);
+}
+
+.button-list-container .btn-secondary.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+
+.header-mobile-compact {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px; /* più compatto */
+}
+
+.header-mobile-compact h1 {
+  font-size: 1.2em;
+  margin: 0 8px;
+}
+
+/* Header compatto in modalità ridotta */
+.header-mobile-compact {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px; /* più stretto */
+}
+
+.header-mobile-compact h1 {
+  font-size: 1.1em; /* più piccolo */
+  margin: 0 8px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-mobile-compact p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #f0f0f0; /* più leggero */
+}
+
+.header-mobile-compact .btn-secondary {
+  order: 0; /* pulsante a sinistra */
+  padding: 6px 10px;
+  font-size: 1em;
+}
+
+/* Header compatto in modalità ridotta */
+.header-mobile-compact {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px; /* più stretto */
+}
+
+.header-mobile-compact h1 {
+  font-size: 1.1em; /* più piccolo */
+  margin: 0 8px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-mobile-compact p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #f0f0f0; /* più leggero */
+}
+
+.header-mobile-compact .btn-secondary {
+  order: 0; /* pulsante a sinistra */
+  padding: 6px 10px;
+  font-size: 1em;
+}

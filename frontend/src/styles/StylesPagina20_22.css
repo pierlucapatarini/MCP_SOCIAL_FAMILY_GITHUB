@@ -1,0 +1,221 @@
+/* ==================================================================================
+// FILE: src/styles/Stile_Menu20.css
+// ================================================================================== */
+
+/* Contenitore principale della pagina Notizie */
+.pagina20-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.pagina20-container h1 {
+    color: #004a7c; /* Alfred Blue */
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pagina20-description-text {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* --- Sezione Interazione e Filtri (anche per i documenti) --- */
+.pagina20-filters-section {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.pagina20-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.pagina20-filter-button {
+    padding: 10px 15px;
+    border: 1px solid #004a7c;
+    border-radius: 20px;
+    background-color: #e0f2ff;
+    color: #004a7c;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.pagina20-filter-button:hover:not(.active) {
+    background-color: #cce7ff;
+    transform: translateY(-2px);
+}
+
+.pagina20-filter-button.active {
+    background-color: #004a7c;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 74, 124, 0.2);
+}
+
+.pagina20-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagina20-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background-color: #004a7c;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pagina20-button:hover {
+    background-color: #003358;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.pagina20-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* --- Sezione di Output (per notizie e documenti) --- */
+.pagina20-output-section {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    min-height: 200px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.pagina20-summary-box {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.pagina20-loading-state,
+.pagina20-error-message,
+.pagina20-no-results {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1.2em;
+}
+
+.pagina20-loading-state {
+    color: #004a7c;
+}
+
+.pagina20-loading-spinner {
+    font-size: 3em;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.pagina20-error-message {
+    color: #a72323;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+.pagina20-no-results {
+    color: #727b84;
+    font-style: italic;
+}
+
+.pagina20-summary-footer {
+    width: 100%;
+    text-align: right;
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #666;
+    border-top: 1px dashed #eee;
+    padding-top: 10px;
+}
+
+/* Player audio */
+.pagina20-audio-player {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.pagina20-text-output {
+    line-height: 1.6;
+    font-size: 1.05em;
+}
+
+.pagina20-text-output h2 {
+    color: #004a7c;
+    border-bottom: 1px solid #ced4da;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.pagina20-text-output ul {
+    list-style-type: '👉 ';
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.pagina20-text-output li {
+    margin-bottom: 12px;
+}
+
+.pagina20-text-output strong {
+    color: #004a7c;
+}
+
+/* Stili specifici per la nuova pagina dei documenti */
+.pagina20-text-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+.pagina20-text-input:focus {
+    outline: none;
+    border-color: #004a7c;
+}

@@ -1,0 +1,37 @@
+.pagina01_03-volantini {
+  background-color: silver;
+  color: gold;
+  padding: 20px;
+  font-family: "Arial Black", sans-serif;
+}
+
+.pagina01_03-volantini h1 {
+  color: black;
+  text-align: center;
+  text-shadow: 1px 1px 3px #333;
+}
+
+.pagina01_03-volantini .bottoni-scraping button {
+  background-color: black;
+  color: gold;
+  border: 2px solid gold;
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagina01_03-volantini .bottoni-scraping button:hover {
+  background-color: gold;
+  color: black;
+  transform: scale(1.05);
+}
+
+.pagina01_03-volantini .risultato-scraping {
+  background-color: #222;
+  color: #ffcc00;
+  padding: 15px;
+  margin-top: 20px;
+  overflow-x: auto;
+  max-height: 400px;
+}

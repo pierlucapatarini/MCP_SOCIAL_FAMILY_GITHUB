@@ -1,0 +1,920 @@
+
+/* ModernContacalorie.css - Stile moderno per l'app contacalorie */
+
+:root {
+  /* Palette colori moderna */
+  --primary-color: #667eea;
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-color: #f093fb;
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-light: #9ca3af;
+  --border-color: #e5e7eb;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Reset e base */
+.modern-calorie-app {
+  min-height: 100vh;
+  background: var(--background-color);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Header moderno */
+.modern-header {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+  animation: bounce 2s infinite;
+}
+
+.logo-section h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(45deg, #fff, #f0f9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+  font-size: 1rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.menu-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.menu-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Container principale */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Sezione Input */
+.input-section {
+  margin-bottom: 3rem;
+}
+
+.input-card {
+  background: var(--surface-color);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  color: var(--text-primary);
+}
+
+.title-icon {
+  font-size: 1.5rem;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.modern-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background: #fafbfc;
+}
+
+.modern-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: white;
+}
+
+.modern-textarea::placeholder {
+  color: var(--text-light);
+}
+
+.suggestions {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--primary-color);
+}
+
+.suggestions h4 {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.suggestions ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style-type: none;
+}
+
+.suggestions li {
+  position: relative;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.suggestions li::before {
+  content: "✨";
+  position: absolute;
+  left: -1.25rem;
+}
+
+.analyze-button {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-lg);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-md);
+  align-self: flex-start;
+}
+
+.analyze-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.analyze-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+/* Alert moderni */
+.error-alert, .success-alert {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.error-alert {
+  background: #fef2f2;
+  color: var(--error-color);
+  border: 1px solid #fecaca;
+}
+
+.success-alert {
+  background: #f0fdf4;
+  color: var(--success-color);
+  border: 1px solid #bbf7d0;
+}
+
+/* Sezione Risultati */
+.results-section {
+  background: var(--surface-color);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.save-button {
+  background: var(--success-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.save-button:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Summary Cards */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.summary-card.calories-card {
+  background: linear-gradient(135deg, #fef7cd 0%, #fde68a 100%);
+  border-color: #f59e0b;
+}
+
+.card-icon {
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.card-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Giudizio Nutrizionale */
+.judgment-card {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+.judgment-icon {
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.judgment-content h4 {
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.judgment-content p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Sezione Dettagli */
+.details-section {
+  margin-top: 2rem;
+}
+
+.details-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+/* Tabella moderna */
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.modern-table thead {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.modern-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modern-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+}
+
+.modern-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.type-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.type-cibo {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.type-bevanda {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.type-condimento {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.food-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.table-input {
+  width: 80px;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.table-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.input-with-unit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.unit {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.calories-cell {
+  text-align: center;
+}
+
+.calories-value {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+/* Griglia Totali */
+.totals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.total-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.total-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.total-card.main-total {
+  background: var(--primary-gradient);
+  color: white;
+  border-color: var(--primary-color);
+  font-weight: 600;
+}
+
+.total-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.total-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Animazioni */
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -15px, 0);
+  }
+  70% {
+    transform: translate3d(0, -7px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0 1rem;
+  }
+
+  .input-card, .results-section {
+    padding: 1.5rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .logo-section {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .logo-section h1 {
+    font-size: 2rem;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .modern-table {
+    font-size: 0.875rem;
+  }
+
+  .modern-table th,
+  .modern-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .table-input {
+    width: 60px;
+    padding: 0.375rem;
+  }
+
+  .totals-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-header {
+    padding: 1.5rem 0;
+  }
+
+  .logo-section h1 {
+    font-size: 1.75rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .analyze-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .table-container {
+    font-size: 0.75rem;
+  }
+}
+
+
+/* StileRecipeAI.css */
+
+/* ---------------------------------------------------- */
+/* 1. LAYOUT PRINCIPALE (Isolato) */
+/* ---------------------------------------------------- */
+.recipe-ai-container {
+    /* Eredita da MainStyle.css, ma garantiamo un contenitore flessibile */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--background-color, #f8fafc); /* Fallback */
+    padding: 20px;
+}
+
+.recipe-ai-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 2px solid var(--border-color, #e5e7eb);
+    margin-bottom: 20px;
+}
+
+.recipe-ai-header h1 {
+    font-size: 2.2rem;
+    color: var(--primary-color, #667eea);
+}
+
+.recipe-ai-main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ---------------------------------------------------- */
+/* 2. CARD E INPUT (Resi Specifici) */
+/* ---------------------------------------------------- */
+.recipe-content-card {
+    background-color: var(--surface-color, #ffffff);
+    border-radius: var(--border-radius, 8px);
+    padding: 25px;
+    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.recipe-content-card h2,
+.recipe-content-card h3 {
+    color: var(--text-primary, #1f2937);
+    margin-top: 0;
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.recipe-textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 15px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: var(--border-radius, 8px);
+    font-size: 1rem;
+    line-height: 1.5;
+    resize: vertical;
+    box-shadow: inset var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
+    transition: border-color 0.3s;
+    margin-bottom: 15px;
+}
+
+.recipe-textarea:focus {
+    border-color: var(--primary-color, #667eea);
+    outline: none;
+}
+
+/* ---------------------------------------------------- */
+/* 3. GRUPPO BOTTONI (Reso Specifico) */
+/* ---------------------------------------------------- */
+.recipe-buttons-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.recipe-buttons-group button {
+    flex-grow: 1;
+    min-width: 150px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--border-radius-sm, 6px);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.recipe-buttons-group .btn-primary {
+    background-color: var(--primary-color, #667eea);
+    color: white;
+}
+
+.recipe-buttons-group .btn-info {
+    background-color: #3b82f6; /* Un blu per le istruzioni */
+    color: white;
+}
+
+.recipe-buttons-group .btn-warning {
+    background-color: var(--warning-color, #f59e0b);
+    color: var(--text-primary, #1f2937);
+}
+
+
+/* ---------------------------------------------------- */
+/* 4. SEZIONE INGREDIENTI */
+/* ---------------------------------------------------- */
+.ingredient-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.ingredient-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--background-color, #f8fafc);
+    padding: 8px 12px;
+    border-radius: var(--border-radius-sm, 6px);
+    border: 1px solid var(--border-color, #e5e7eb);
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.ingredient-label:hover {
+    background-color: #eef2ff; /* Light primary hover */
+}
+
+.ingredient-label input[type="checkbox"] {
+    margin-right: 8px;
+    /* Stile personalizzato per la checkbox (opzionale) */
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color, #667eea);
+}
+
+.btn-add-to-list {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--success-color, #10b981);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--border-radius-sm, 6px);
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-add-to-list:hover:not(:disabled) {
+    background-color: #0c9b6f;
+}
+
+/* ---------------------------------------------------- */
+/* 5. SEZIONE ISTRUZIONI */
+/* ---------------------------------------------------- */
+.instructions-box {
+    white-space: pre-wrap; /* Mantiene la formattazione (a capo, liste) fornita dall'AI */
+    background-color: #f7fbf8; /* Sfondo molto chiaro per il contenuto */
+    border: 1px dashed #a7f3d0; /* Bordo verde/blu chiaro */
+    padding: 20px;
+    border-radius: var(--border-radius-sm, 6px);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* ---------------------------------------------------- */
+/* 6. MODAL (Lasciate in modo generico per riutilizzo) */
+/* ---------------------------------------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--surface-color, #ffffff);
+    padding: 30px;
+    border-radius: var(--border-radius, 8px);
+    max-width: 90%;
+    width: 500px;
+    box-shadow: var(--shadow-lg, 0 10px 15px rgba(0, 0, 0, 0.2));
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.modal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm, 6px);
+    background-color: var(--background-color, #f8fafc);
+}
+
+/* ---------------------------------------------------- */
+/* 7. MEDIA QUERY (Responsive) */
+/* ---------------------------------------------------- */
+@media (max-width: 768px) {
+    .recipe-ai-container {
+        padding: 10px;
+    }
+    
+    .recipe-ai-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-buttons {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .recipe-content-card {
+        padding: 15px;
+    }
+
+    .recipe-buttons-group {
+        flex-direction: column;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}
+
+/* Fallback per i pulsanti .btn-secondary, .btn-primary, etc. se MainStyle non li copre bene */
+.btn-secondary {
+    background-color: var(--text-light, #9ca3af);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #6b7280;
+}

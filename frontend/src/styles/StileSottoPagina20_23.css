@@ -1,0 +1,159 @@
+/* Stili specifici per SottoPagina4_3 */
+
+/* === Stili Migrati da styles.appLayout (ORA .ai-page-layout) === */
+.ai-page-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f0f2f5; 
+}
+
+/* === Stili Migrati da styles.header e styles.h1 (ORA .ai-header e .ai-h1) === */
+.ai-header {
+    background-color: #4a2263;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.ai-h1 {
+    margin: 0;
+}
+
+/* === Stili Migrati da styles.btnSecondary (ORA .ai-btn-secondary) === */
+.ai-btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ai-btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* === Stili Migrati da styles.mainContent (ORA .ai-main-content) === */
+.ai-main-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* === Stili Migrati da styles.aiButlerCard === */
+.ai-butler-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* === Stili Migrati da styles.aiIntro === */
+.ai-intro {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* === Stili Migrati da styles.btnPrimary (ORA .ai-btn-primary) === */
+.ai-btn-primary {
+    background-color: #00897b; 
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ai-btn-primary:hover {
+    background-color: #006a5e; 
+    transform: translateY(-2px);
+}
+
+.ai-btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none; 
+}
+
+/* === Stili Migrati da styles.errorMessage (ORA .ai-error-message) === */
+.ai-error-message {
+    color: #d32f2f;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* === Stili Migrati da styles.summaryCard (ORA .ai-summary-card) === */
+.ai-summary-card {
+    background-color: #e8f5e9; 
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+    border: 1px solid #c8e6c9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Classe per il testo contenuto nel riepilogo */
+.ai-summary-content {
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+    font-size: 1em; 
+    line-height: 1.6;
+}
+
+/* === Stili Migrati per il loading spinner (ORA .ai-loading-spinner-container e .ai-loading-spinner) === */
+.ai-loading-spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.ai-loading-spinner {
+    font-size: 3em;
+    animation: spin-custom 1.5s linear infinite; 
+    display: inline-block;
+}
+
+@keyframes spin-custom {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Ho rimosso le classi non più utilizzate (.loading-container, .spinner, .summary-text-container) per pulizia --- */
+
+/* Stili non rinominati se appartengono a elementi generici che non causano collisione */
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .ai-summary-card {
+        padding: 20px;
+        margin: 10px;
+    }
+}
