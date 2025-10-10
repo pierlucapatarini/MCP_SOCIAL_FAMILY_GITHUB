@@ -4,6 +4,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import '../../styles/StylesPages16_06.css'; 
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 function ExportPagina16_06() {
     // Stati per i filtri e il contenuto
     const [selectedCategories, setSelectedCategories] = useState(['Italia']);
@@ -54,7 +56,7 @@ function ExportPagina16_06() {
         }
 
         try {
-            const response = await axios.post('/api/alfred/news', {
+            const response = await axios.post(`${API_URL}/api/alfred/news`, {
                 categories: finalCategories,
                 timeRange: finalTime,
                 italyDetailed: italyDetailedMode && finalCategories.includes('Italia'),

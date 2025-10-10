@@ -7,6 +7,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/StylesPagina20_22.css';
 
+const API_URL = process.env.REACT_APP_API_URL; 
+
 function ExportPagina20_22() {
     const [question, setQuestion] = useState("");
     const [summaryText, setSummaryText] = useState("");
@@ -34,7 +36,7 @@ function ExportPagina20_22() {
         setError(null);
 
         try {
-            const response = await axios.post('api/alfred/query', {
+            const response = await axios.post(`${API_URL}api/alfred/query`, {
                 question: question,
                 alfredId: alfredDetails.id,
                 familyId: alfredDetails.familyId
