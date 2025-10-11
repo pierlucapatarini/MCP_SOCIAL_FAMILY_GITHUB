@@ -4,7 +4,10 @@
 import { Router } from "express";
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { supabase } from "../config.js";
+// Assumo che l'oggetto gemini sia importato qui, come nel tuo esempio
+import { supabase, gemini } from "../config.js"; 
+// Importa il prompt
+import { ALFRED_NEWS_PROMPT } from "../prompts/Prompts16_06AlfredNewsSummary.js"; 
 
 const router = Router();
 
@@ -13,6 +16,80 @@ const NEWSDATA_API_KEY = process.env.NEWSDATA_API_KEY;
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 const SUPABASE_STORAGE_BUCKET = process.env.SUPABASE_STORAGE_BUCKET || 'audio-files';
 
+
+// Funzione di utility per il logging (dal tuo esempio)
+const createLogFunction = (logs) => (step, message) => {
+    const fullMessage = `[STEP ${step}] ${message}`;
+    logs.push(fullMessage);
+    console.log(fullMessage);
+};
+
+// Funzione helper per estrarre il testo dal wrapper (dal tuo esempio)
+const extractTextFromResponse = (response) => {
+    if (!response) return null;
+    
+    // 1. Tenta la scorciatoia .text dell'SDK (soluzione ideale)
+    if (response.text) return response.text;
+
+    // 2. Se fallisce, naviga la struttura cruda (soluzione robusta)
+    if (response.response && response.response.candidates && response.response.candidates.length > 0) {
+        return response.response.candidates[0].content.parts[0].text;
+    }
+
+    return null;
+};
+
+
+// 💡 FUNZIONE AGGIORNATA PER UTILIZZARE GEMINI
+/**
+ * Chiama Gemini per generare un riassunto con la personalità di Alfred.
+ * @param {string} prompt Il prompt completo.
+ * @param {object[]} articleData L'array di oggetti notizia da riassumere.
+ * @returns {Promise<string>} Il riassunto generato in Markdown/Testo.
+ */
+async function generateAlfredSummary(prompt, articleData, timeRange) {
+    if (!gemini) {
+        // Fallback per test senza chiave Gemini
+        console.warn("⚠️ Oggetto Gemini non disponibile. Uso placeholder per test.");
+        return `Buongiorno, sono Alfred. Non sono riuscito a contattare i miei servizi avanzati, ma le ultime ${timeRange} ore sono state intense. Per favore, verificate la configurazione di Gemini.`;
+    }
+
+    const articlePayload = articleData.map(a => ({
+        source: a.source,
+        category: a.category,
+        title: a.title,
+        content_snippet: a.content.substring(0, 300) + '...',
+        pubDate: a.pubDate
+    }));
+
+    // Costruisce il messaggio finale da inviare all'AI
+    const fullPromptForAI = `${prompt}\n\nARTICOLI DA RIASSUMERE (JSON):\n${JSON.stringify(articlePayload, null, 2)}`;
+    
+    // Si usa il modello Flash per velocità, coerente con il tuo esempio
+    const summaryModel = gemini.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+    try {
+        const response = await summaryModel.generateContent({
+            contents: [{ parts: [{ text: fullPromptForAI }] }],
+            config: {
+                temperature: 0.6 // Per un tono bilanciato, non troppo creativo
+            }
+        });
+        
+        const rawText = extractTextFromResponse(response);
+
+        if (!rawText) {
+            console.error('❌ LOG: Risposta Gemini vuota o mancante.');
+            throw new Error('Risposta vuota o non valida dalla generazione del summary.');
+        }
+
+        return rawText;
+
+    } catch (error) {
+        console.error("❌ Errore durante la chiamata Gemini per il summary:", error.message);
+        throw new Error(`Errore AI: Impossibile generare il riassunto. Dettagli: ${error.message}`);
+    }
+}
 
 
 // A) Funzione per fetch notizie italiane da RSS
@@ -24,7 +101,6 @@ async function fetchItalianNews(timeRange, detailedMode = false) {
         { url: 'https://www.ilsole24ore.com/rss/italia--attualita.xml', source: 'Il Sole 24 Ore' }
     ];
 
-    // Se modalità dettagliata, aggiungi RSS specifici
     if (detailedMode) {
         italianRssUrls.push(
             { url: 'https://www.gazzetta.it/rss/home.xml', source: 'Gazzetta dello Sport' },
@@ -52,12 +128,11 @@ async function fetchItalianNews(timeRange, detailedMode = false) {
                     pubDate = new Date(pubDateText);
                 }
 
-                // Filtra per tempo e qualità
                 if (pubDate > minTime && title && title.length > 10) {
                     italianArticles.push({ 
                         source: rssSource.source,
                         title, 
-                        content: description || title, 
+                        content: description.length > 20 ? description : title, 
                         category: 'Italia',
                         link: link,
                         pubDate: pubDate.toISOString()
@@ -65,11 +140,10 @@ async function fetchItalianNews(timeRange, detailedMode = false) {
                 }
             });
         } catch (err) {
-            console.warn(`⚠️ RSS fetch failed per ${rssSource.source}:`, err.message);
+            // console.warn(`⚠️ RSS fetch failed per ${rssSource.source}:`, err.message);
         }
     }
 
-    // Ordina per data e limita
     return italianArticles
         .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate))
         .slice(0, detailedMode ? 30 : 15);
@@ -90,7 +164,6 @@ async function fetchWorldNews(categories, timeRange) {
         const countries = worldCategoriesMap[category];
         if (!countries) continue;
 
-        // LIMITIAMO IL NUMERO DI PAESI PER OGNI CHIAMATA PER ESSERE PIÙ EFFICIENTI
         const newsDataUrl = `https://newsdata.io/api/1/news?apikey=${NEWSDATA_API_KEY}&country=${countries.join(',')}&language=en&from_date=${fromDate}&size=8`;
 
         try {
@@ -110,7 +183,7 @@ async function fetchWorldNews(categories, timeRange) {
                 );
             }
         } catch (err) {
-            console.warn(`⚠️ NewsData.io failed for ${category}:`, err.message);
+            // console.warn(`⚠️ NewsData.io failed for ${category}:`, err.message);
         }
     }
 
@@ -125,14 +198,23 @@ async function generateAndUploadTTS(text, categories, timeRange, italyDetailed =
     }
     
     try {
-        // Prepara il testo per TTS (rimuovi markdown)
+        // Prepara il testo per TTS (pulizia HTML e Markdown)
         const cleanText = text
-            .replace(/#{1,6}\s/g, '') // Rimuovi header markdown
-            .replace(/\*\*(.*?)\*\*/g, '$1') // Rimuovi grassetto
-            .replace(/\*(.*?)\*/g, '$1') // Rimuovi corsivo
-            .replace(/`(.*?)`/g, '$1') // Rimuovi code
-            .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Rimuovi link markdown
-            .substring(0, 2500); // Limita lunghezza per ElevenLabs
+            .replace(/<[^>]*>/g, '') // Rimuove HTML
+            .replace(/#{1,6}\s/g, '') // Rimuove header markdown
+            .replace(/\*\*(.*?)\*\*/g, '$1') // Rimuove grassetto
+            .replace(/\*(.*?)\*/g, '$1') // Rimuove corsivo
+            .replace(/`(.*?)`/g, '$1') // Rimuove code
+            .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Rimuove link markdown
+            .replace(/\\n/g, '\n')
+            .replace(/\s+/g, ' ') 
+            .trim()
+            .substring(0, 2500); 
+
+        if (cleanText.length < 50) {
+            console.warn("⚠️ Testo per TTS troppo corto dopo la pulizia. Uso placeholder.");
+            return `http://localhost:3001/audio/news_placeholder.mp3`;
+        }
 
         // Chiamata a ElevenLabs
         const elevenLabsResponse = await axios.post(
@@ -157,12 +239,11 @@ async function generateAndUploadTTS(text, categories, timeRange, italyDetailed =
             }
         );
 
-        // Nome file unico
+        // Upload a Supabase Storage
         const timestamp = Date.now();
         const categoriesSlug = categories.sort().join('_').toLowerCase().replace(/\s+/g, '_');
         const fileName = `alfred_news_${categoriesSlug}_${timeRange}h${italyDetailed ? '_detailed' : ''}_${timestamp}.mp3`;
 
-        // Upload a Supabase Storage
         const { data: uploadData, error: uploadError } = await supabase.storage
             .from(SUPABASE_STORAGE_BUCKET)
             .upload(fileName, elevenLabsResponse.data, {
@@ -171,7 +252,6 @@ async function generateAndUploadTTS(text, categories, timeRange, italyDetailed =
 
         if (uploadError) throw uploadError;
 
-        // Genera URL pubblico
         const { data: publicUrlData } = supabase.storage
             .from(SUPABASE_STORAGE_BUCKET)
             .getPublicUrl(fileName);
@@ -180,49 +260,105 @@ async function generateAndUploadTTS(text, categories, timeRange, italyDetailed =
 
     } catch (error) {
         console.error("❌ Errore TTS/Upload:", error.message);
-        // Fallback in caso di errore
         return `http://localhost:3001/audio/news_placeholder.mp3`;
     }
 }
 
 // ===================================
-// 🔥 ROUTE HANDLER PRINCIPALE - QUESTO MANCAVA!
+// 🔥 ROUTE HANDLER PRINCIPALE
 // ===================================
 router.post('/', async (req, res) => {
+    // Inizializza il logging
+    const logs = [];
+    const logStep = createLogFunction(logs);
+    
+    let timer;
+    const TIMEOUT_MS_GLOBAL = 120000;
+    
+    // Configura il timeout globale
+    const timeoutPromiseGlobal = new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error('Timeout complessivo della richiesta.')), TIMEOUT_MS_GLOBAL);
+    });
+    
     try {
         const { categories = ['Italia'], timeRange = 24, italyDetailed = false, mode = 'classic' } = req.body;
+        const TIMEOUT_MS_AI_CALL = 90000; 
 
-        console.log(`📰 Alfred News Request: categories=${categories.join(',')}, timeRange=${timeRange}h, detailed=${italyDetailed}`);
+        logStep("0", `Avvio Alfred News Request: categorie=${categories.join(',')}, timeRange=${timeRange}h, detailed=${italyDetailed}`);
 
-        // 1. Fetch notizie italiane
+        // 1. Fetch notizie
         let allArticles = [];
+        logStep("1", "Inizio fetching notizie...");
+        
+        const fetchPromises = [];
         if (categories.includes('Italia')) {
-            const italianNews = await fetchItalianNews(timeRange, italyDetailed);
-            allArticles = allArticles.concat(italianNews);
-            console.log(`🇮🇹 Fetched ${italianNews.length} Italian articles`);
+            fetchPromises.push(fetchItalianNews(timeRange, italyDetailed).then(news => {
+                logStep("1", `🇮🇹 Trovati ${news.length} articoli italiani.`);
+                return news;
+            }));
         }
 
-        // 2. Fetch notizie internazionali
         const worldCategories = categories.filter(c => c !== 'Italia');
         if (worldCategories.length > 0) {
-            const worldNews = await fetchWorldNews(worldCategories, timeRange);
-            allArticles = allArticles.concat(worldNews);
-            console.log(`🌍 Fetched ${worldNews.length} world articles`);
+            fetchPromises.push(fetchWorldNews(worldCategories, timeRange).then(news => {
+                logStep("1", `🌍 Trovati ${news.length} articoli internazionali.`);
+                return news;
+            }));
         }
+
+        const fetchedNews = await Promise.race([
+            Promise.all(fetchPromises),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout nel fetching delle notizie (Fase 1).')), 30000))
+        ]);
+        
+        allArticles = fetchedNews.flat();
+
 
         if (allArticles.length === 0) {
+            logStep("1", "⚠️ Nessuna notizia trovata.");
+            clearTimeout(timer);
             return res.status(404).json({ 
-                error: 'Nessuna notizia trovata per i criteri selezionati.' 
+                error: 'Nessuna notizia trovata per i criteri selezionati.',
+                logs
             });
         }
+        
+        logStep("1", `✅ Totale articoli per l'AI: ${allArticles.length}.`);
 
-        // 3. Genera summary con AI (simulato per ora )
-        const summaryText = generateNewsSummary(allArticles, categories, timeRange);
+        // 2. Genera Prompt completo
+        logStep("2", "Preparazione prompt per il modello AI (Alfred)...");
+        const fullPrompt = ALFRED_NEWS_PROMPT
+            .replace('{timeRange}', timeRange)
+            .replace('{requestedCategories}', categories.join(', '));
+
+
+        // 3. Genera summary con Gemini (Chiamata AI Reale)
+        logStep("3", "Invocazione del modello AI Gemini per il riassunto...");
+        
+        const summaryPromise = generateAlfredSummary(fullPrompt, allArticles, timeRange);
+
+        const summaryText = await Promise.race([
+            summaryPromise,
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout nella generazione del summary (Fase 3).')), TIMEOUT_MS_AI_CALL))
+        ]);
+        
+        logStep("3", '✅ Summary AI generato.');
 
         // 4. Genera audio TTS
-        const audioUrl = await generateAndUploadTTS(summaryText, categories, timeRange, italyDetailed);
+        logStep("4", "Generazione e upload dell'audio TTS (ElevenLabs / Supabase)...");
+        
+        const ttsPromise = generateAndUploadTTS(summaryText, categories, timeRange, italyDetailed);
+        
+        const audioUrl = await Promise.race([
+            ttsPromise,
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout nella generazione TTS (Fase 4).')), TIMEOUT_MS_AI_CALL))
+        ]);
+        
+        logStep("4", `🔊 Audio URL pronto: ${audioUrl}`);
 
         // 5. Risposta finale
+        logStep("5", "Risposta finale inviata al client.");
+        clearTimeout(timer);
         res.json({
             summaryText,
             audioUrl,
@@ -230,70 +366,24 @@ router.post('/', async (req, res) => {
             categories,
             timeRange,
             cached: false,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            logs: logs
         });
 
     } catch (error) {
+        clearTimeout(timer);
+        logStep("X", `ERRORE FATALE NELLA ROUTE: ${error.message}`);
         console.error('❌ Errore nella route /api/alfred/news:', error);
         res.status(500).json({ 
+            status: "error",
             error: 'Errore interno del server. Riprova più tardi.',
-            details: error.message 
+            details: error.message,
+            logs: logs
         });
     }
 });
 
-// Funzione helper per generare il summary (puoi sostituire con AI)
-function generateNewsSummary(articles, categories, timeRange) {
-    const articlesCount = articles.length;
-    const categoriesText = categories.join(', ');
-    
-    let summary = `<h2>📰 Riepilogo Notizie - ${categoriesText}</h2>\n`;
-    summary += `<p><strong>Periodo:</strong> Ultime ${timeRange} ore | <strong>Articoli analizzati:</strong> ${articlesCount}</p>\n\n`;
-
-    // Raggruppa per categoria
-    const articlesByCategory = articles.reduce((acc, article) => {
-        if (!acc[article.category]) acc[article.category] = [];
-        acc[article.category].push(article);
-        return acc;
-    }, {});
-
-    for (const [category, categoryArticles] of Object.entries(articlesByCategory)) {
-        summary += `<h3>${getCategoryEmoji(category)} ${category}</h3>\n`;
-        
-        // Mostra i primi 5 articoli per categoria
-        categoryArticles.slice(0, 5).forEach((article, index) => {
-            summary += `<div style="margin-bottom: 15px;">\n`;
-            summary += `<strong>${index + 1}. ${article.title}</strong><br>\n`;
-            summary += `<small><em>Fonte: ${article.source}</em></small><br>\n`;
-            if (article.content && article.content !== article.title) {
-                const shortContent = article.content.substring(0, 150) + '...';
-                summary += `${shortContent}<br>\n`;
-            }
-            if (article.link) {
-                summary += `<a href="${article.link}" target="_blank">Leggi articolo completo</a>\n`;
-            }
-            summary += `</div>\n`;
-        });
-    }
-
-    summary += `<hr>\n<p><small>🤖 Riepilogo generato da Alfred alle ${new Date().toLocaleString('it-IT')}</small></p>`;
-    
-    return summary;
-}
-
-function getCategoryEmoji(category) {
-    const emojiMap = {
-        'Italia': '🇮🇹',
-        'Mondo Occidentale': '🌍',
-        'Mondo Arabo': '🕌',
-        'Mondo Orientale': '🏯'
-    };
-    return emojiMap[category] || '📰';
-}
-
-
-
 // ==================================================================================
-// 🟢 FINE ROTTA "Routes16 06LeggiNotizieDalMondo"
+// 🟢 FINE ROTTA "Routes16_06LeggiNotizieDalMondo"
 // ==================================================================================
 export default router;

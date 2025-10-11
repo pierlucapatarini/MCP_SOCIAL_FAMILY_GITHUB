@@ -113,6 +113,9 @@ app.get('/api/health', (req, res) => {
 // ---------------------------------------------------------------------
 // MONTAGGIO DELLE ROTTE API
 // ---------------------------------------------------------------------
+// ---------------------------------------------------------------------
+// MONTAGGIO DELLE ROTTE API
+// ---------------------------------------------------------------------
 app.use("/api/recipe", recipesRouter03_01);
 app.use("/api/contacalorie", caloriesRouter03_04);
 app.use("/api/nutrition", nutritionRouter03_05);
@@ -127,8 +130,8 @@ app.use("/api/alfred-chat", alfredChatbotRouter);
 app.use("/api/food/ricette-da-foto", ricetteDalFrigoRouter);
 app.use("/api/test", testMediaRouter104_0); 
 // 🚨 QUESTA RIGA MANCAVA - AGGIUNGI newsRouter16_06
-app.use("/api/alfred/news", newsRouter16_06); 
-app.use("/api/alfred/query", queriesRouter20_22); 
+app.use("/api/alfred/news", newsRouter16_06); // ⬅️ ROTTA AGGIUNTA
+app.use("/api/alfred/query", queriesRouter20_22);
 
 
 
