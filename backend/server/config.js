@@ -32,8 +32,6 @@ import alfredChatbotRouter from "./routes/RoutesAlfredChatbot.js";
 import ricetteDalFrigoRouter from "./routes/Routes03_06AnalizzaFrigoDispensaTrovaRicette.js";
 import testMediaRouter104_0 from "./routes/TestRoutes104_0AudioVideoFoto.js";
 
-import newsRouter16_06 from "./routes/Routes16_06LeggiNotizieDalMondo.js";
-import QueryAlfredRouter20_22 from "./routes/Routes20_22InfoDocumentiArchiviati.js";
 
 
 // ---------------------------------------------------------------------
@@ -130,7 +128,7 @@ app.use("/api/food/ricette-da-foto", ricetteDalFrigoRouter);
 app.use("/api/test", testMediaRouter104_0); 
 // 🚨 QUESTA RIGA MANCAVA - AGGIUNGI newsRouter16_06
 app.use("/api/alfred/news", newsRouter16_06); 
-app.use("/api/alfred/query", newsRouter16_06); 
+app.use("/api/alfred/query", queriesRouter20_22); 
 
 
 
