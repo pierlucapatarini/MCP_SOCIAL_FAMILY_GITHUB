@@ -40,7 +40,7 @@ const extractTextFromResponse = (response) => {
 };
 
 
-// 💡 FUNZIONE AGGIORNATA PER UTILIZZARE GEMINI
+// 💡 FUNZIONE AGGIORNATA PER UTILIZZARE GEMINI (CON CORREZIONE generationConfig)
 /**
  * Chiama Gemini per generare un riassunto con la personalità di Alfred.
  * @param {string} prompt Il prompt completo.
@@ -71,7 +71,8 @@ async function generateAlfredSummary(prompt, articleData, timeRange) {
     try {
         const response = await summaryModel.generateContent({
             contents: [{ parts: [{ text: fullPromptForAI }] }],
-            config: {
+            // 🚨 CORREZIONE: Sostituito 'config' con 'generationConfig' per Gemini SDK
+            generationConfig: { 
                 temperature: 0.6 // Per un tono bilanciato, non troppo creativo
             }
         });
@@ -306,13 +307,12 @@ router.post('/', async (req, res) => {
             }));
         }
 
-        const fetchedNews = await Promise.race([
-            Promise.all(fetchPromises),
-            new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout nel fetching delle notizie (Fase 1).')), 30000))
-        ]);
+        // 💡 NUOVA LOGICA: Uso Promise.allSettled per robustezza nel fetching (Fase 1)
+        const fetchedNews = await Promise.allSettled(fetchPromises);
         
-        allArticles = fetchedNews.flat();
-
+        allArticles = fetchedNews
+            .filter(result => result.status === 'fulfilled')
+            .flatMap(result => result.value); // Usa flatMap per appiattire e assegnare
 
         if (allArticles.length === 0) {
             logStep("1", "⚠️ Nessuna notizia trovata.");
